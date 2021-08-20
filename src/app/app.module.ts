@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
+import {HttpInterceptorModule} from "./service/header-interceptor.service";
 
 
   /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -28,6 +29,7 @@ export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(a
   imports: [
     BrowserModule,
     routes,
+    HttpInterceptorModule,
     HttpClientModule, /*IMPORTANT: Modulo de realizar requisicoes AJAX */
     ReactiveFormsModule,
     FormsModule /* Modulo de formulario para bindar objetos */
