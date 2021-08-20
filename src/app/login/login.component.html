@@ -1,0 +1,20 @@
+<form action="">
+  <div class="form-text mb-3"><h3>Login</h3></div>
+  <div class="mb-3">
+    <label class="form-label" for="username">Email:</label>
+    <input class="form-control" type="text" id="username" name="username" placeholder="Informe o username"
+           required="required" #username="ngModel" [(ngModel)]="usuario.username" >
+    <!--    <div class="mb-3 form-text alert alert-danger" *ngIf="username.invalid">-->
+    <!--      Login deve ser informado-->
+    <!--    </div>-->
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="password">Password:</label>
+    <input class="form-control" type="text" id="password" name="password" placeholder="Informe o password"
+           required="required" #password="ngModel" [(ngModel)]="usuario.password">
+    <!--    <div class="form-text alert alert-danger" *ngIf="password.invalid">-->
+    <!--      Password deve ser informado-->
+    <!--    </div>-->
+  </div>
+  <button type="button" [disabled]="username.invalid || password.invalid" class="btn btn-primary" (click)="sigIn()">Sign in</button>
+</form>

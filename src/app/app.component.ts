@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import {LoginServiceService} from "./service/login-service.service";
-import {Usuario} from "./model/usuario";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +7,10 @@ import {Usuario} from "./model/usuario";
 })
 export class AppComponent {
   title = 'angular-sb-microservicos';
-  usuario = {username: "", password: ""};
-  // usuario = new Usuario()
-  loginService : LoginServiceService;
 
-  constructor(loginService: LoginServiceService) {
-    this.loginService = loginService;
+  constructor() {
+
   }
 
-  public sigIn() {
-    this.loginService.signIn(this.usuario);
-  }
+
 }
