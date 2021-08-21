@@ -17,10 +17,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Valor do Token ShowUsersComponent: " + localStorage.getItem("token"));
-
     this.usuarioService.findAllUsers().subscribe( response => {
-      console.log("RESPONSE: " + response);
       this.usuarios = response;
     })
   }
