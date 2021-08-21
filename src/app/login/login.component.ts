@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginServiceService} from "../service/login-service.service";
+import {Usuario} from "../model/usuario";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,14 @@ import {LoginServiceService} from "../service/login-service.service";
 })
 export class LoginComponent implements OnInit {
 
-  usuario = {username: "", password: ""};
-  // usuario = new Usuario()
+  // usuario = {username: "", password: ""};
+  usuario = new Usuario();
   loginService : LoginServiceService;
+  private routes : Router
 
-  constructor(loginService: LoginServiceService) {
+  constructor(loginService: LoginServiceService, routes : Router) {
     this.loginService = loginService;
+    this.routes = routes;
   }
 
   public sigIn() {
@@ -21,6 +25,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    console.log("Valor do Token LoginComponent: " + token + (token === ""))
+    if (token === null) {
+      this.routes.navigate(["/login"]);
+    }
   }
 
 }

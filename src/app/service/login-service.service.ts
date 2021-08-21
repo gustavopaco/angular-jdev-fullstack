@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {AppConstants} from "../app-constants";
 import {AppComponent} from "../app.component";
 import {Router} from "@angular/router";
+import {Usuario} from "../model/usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class LoginServiceService {
     this.routes = routes;
   }
 
-  public signIn(usuario : object) {
+  public signIn(usuario : Usuario) {
+    console.log("Login: " + usuario.username);
+    console.log("Senha" + usuario.password)
     return this.http.post(AppConstants.baseLogin(), JSON.stringify(usuario)).subscribe(response => {
 
       /* Retorno Http */

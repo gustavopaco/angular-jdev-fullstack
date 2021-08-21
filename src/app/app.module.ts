@@ -3,18 +3,20 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from "@angular/router";
-import { LoginComponent } from './login/login.component';
-import {HttpInterceptorModule} from "./service/header-interceptor.service";
+import {LoginComponent} from './login/login.component';
+import {UsuarioComponent} from "./components/usuario/usuario.component";
+import {HeaderInterceptorService} from "./service/header-interceptor.service";
 
 
-  /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
+/*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
 export const appRouters : Routes = [
+  {path : "", component : LoginComponent},
+  {path : "login", component : LoginComponent},
   {path : "home", component : HomeComponent},
-  {path: "login", component: LoginComponent},
-  {path: "", component: LoginComponent}
+  {path : "showusers", component : UsuarioComponent}
 ]
 
   /* IMPORTANT: Exportando para dentro do app.Module o Array de Rotas URI do sistema */
@@ -24,17 +26,20 @@ export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(a
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
     routes,
-    HttpInterceptorModule,
     HttpClientModule, /*IMPORTANT: Modulo de realizar requisicoes AJAX */
     ReactiveFormsModule,
     FormsModule /* Modulo de formulario para bindar objetos */
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS,
+    useClass: HeaderInterceptorService,
+    multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -8,32 +8,35 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit{
   title = 'angular-sb-microservicos';
-  private routes : Router
+  private routes : Router;
 
   constructor(routes : Router) {
     this.routes = routes;
   }
 
   ngOnInit(): void {
-    const token = localStorage.getItem("token");
-    if (token !== null) {
-      this.routes.navigate(["home"]);
-    } else {
-      this.routes.navigate(["login"]);
-    }
+
   }
 
   public logout() {
     localStorage.clear();
-    this.routes.navigate(["login"]);
+    this.routes.navigate(["/login"]);
   }
 
   public goHome() {
     const token = localStorage.getItem("token");
     if (token !== null) {
-      this.routes.navigate(["home"]);
+      this.routes.navigate(["/home"]);
+    }
+  }
+
+  public goUsuario() {
+    const token = localStorage.getItem("token");
+
+    if (token !== null) {
+      this.routes.navigate(["/showusers"]);
     } else {
-      this.routes.navigate(["login"]);
+      this.routes.navigate(["/login"]);
     }
   }
 }

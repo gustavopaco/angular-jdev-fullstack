@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("Valor do Token HomeComponent: " + localStorage.getItem("token"));
   }
 
 }

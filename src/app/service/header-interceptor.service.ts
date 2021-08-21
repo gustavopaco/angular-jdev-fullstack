@@ -1,38 +1,22 @@
-import {NgModule} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-// @Injectable({
-// providedIn: 'root'
-// })
+@Injectable()
 export class HeaderInterceptorService implements HttpInterceptor {
 
-  constructor() {
-  }
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>,
+            next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (localStorage.getItem("token") !== null) {
-      const token = `Bearer ${localStorage.getItem("token")}`;
-      const tokenRequest = request.clone({
-        headers: request.headers.set("Authorization", token)
+      const token = `Bearer ${localStorage.getItem("token")}`
+
+      const cloned = request.clone({
+      headers : request.headers.set("Authorization", token)
       });
-      return next.handle(tokenRequest);
+      return next.handle(cloned);
     } else {
       return next.handle(request);
     }
   }
-}
-
-@NgModule({
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HeaderInterceptorService,
-    multi: true
-  },
-  ],
-})
-
-export class HttpInterceptorModule {
-
 }

@@ -1,0 +1,18 @@
+<h1>TELA DE USUARIOS</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID:</th>
+    <th>Nome:</th>
+    <th>CPF:</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr *ngFor="let user of usuarios">
+  <td>{{user.id}}</td>
+  <td>{{user.nome}}</td>
+  <td>{{user.cpf}}</td>
+  </tr>
+  </tbody>
+</table>
