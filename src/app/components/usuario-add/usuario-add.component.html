@@ -1,0 +1,52 @@
+<p>Tela Usuario ADD</p>
+<div class="addUsuarioContent">
+  <div class="shadow-lg p-3 mb-5 bg-light rounded" style="min-height: 450px;">
+    <form action="" class="center-formV">
+      <div class="row mb-3">
+        <div class="form-group col-md-1">
+          <label for="id" class="visually-hidden">ID</label>
+          <input type="hidden" class="form-control" id="id" name="id" readonly [autocomplete]="false">
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="form-group col-md-5">
+          <label for="nome" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="nome" name="nome" required="required"
+                 placeholder="Digit your name...">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cpf" class="form-label">SSN:</label>
+          <input type="text" class="form-control" id="cpf" name="cpf" required="required"
+                 placeholder="Inform your SSN...">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="form-group col-md-6 paddingLogin">
+          <label for="username" class="form-label">Login:</label>
+          <input type="text" class="form-control" id="username" name="username" required="required"
+                 placeholder="Create your login">
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="form-group col-md-4">
+          <label for="password" class="form-label">New password:</label>
+          <input type="password" class="form-control" id="password" name="password" required="required"
+                 placeholder="New password">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="confirmpassword" class="form-label">Repeat password:</label>
+          <input type="password" class="form-control" id="confirmpassword" name="password" required="required"
+                 placeholder="Repeat your password">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="form-group col-md-4 paddingLogin">
+          <button type="button" class="btn btn-success">Confirm</button>
+        </div>
+        <div class="form-group col-md-4">
+          <button type="button" class="btn btn-secondary">Back</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

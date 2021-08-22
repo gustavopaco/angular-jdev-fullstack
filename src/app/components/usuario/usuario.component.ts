@@ -9,24 +9,33 @@ import {Usuario} from "../../model/usuario";
 })
 export class UsuarioComponent implements OnInit {
 
-  usuarioService : UsuarioService
-  usuarios : Usuario[];
+  usuarioService: UsuarioService
+  usuarios: Usuario[];
+  nomeUsuario: String
 
-  constructor(usuarioService : UsuarioService) {
+  constructor(usuarioService: UsuarioService) {
     this.usuarioService = usuarioService;
   }
 
   ngOnInit(): void {
-    this.usuarioService.findAllUsers().subscribe( response => {
+    this.usuarioService.findAllUsers().subscribe(response => {
       this.usuarios = response;
     })
   }
 
-  public deleteUsuario(id : Number) {
+  public deleteUsuario(id: Number) {
     this.usuarioService.deleteUserByID(id).subscribe(() => {
-        this.usuarioService.findAllUsers().subscribe(atualizarLista => {
-          this.usuarios = atualizarLista;
+      this.usuarioService.findAllUsers().subscribe(atualizarLista => {
+        this.usuarios = atualizarLista;
       })
     })
+  }
+
+  public findUserByName($event: KeyboardEvent) {
+    if (this.nomeUsuario.length >= 3 || this.nomeUsuario.length === 0) {
+      this.usuarioService.findUserByName(this.nomeUsuario).subscribe(response => {
+        this.usuarios = response;
+      })
+    }
   }
 }

@@ -16,5 +16,12 @@
     <!--      Password deve ser informado-->
     <!--    </div>-->
   </div>
+  <div class="row mb-3">
+    <div class="col-auto">
   <button type="button" [disabled]="username.invalid || password.invalid" class="btn btn-primary" (click)="sigIn()">Sign in</button>
+    </div>
+    <div class="col-auto">
+  <button type="button" class="btn btn-success" [routerLink]="['/addUser']">Sign Up</button>
+    </div>
+  </div>
 </form>

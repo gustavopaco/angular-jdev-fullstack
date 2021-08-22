@@ -9,6 +9,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from './login/login.component';
 import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {HeaderInterceptorService} from "./service/header-interceptor.service";
+import { UsuarioAddComponent } from './components/usuario-add/usuario-add.component';
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -16,7 +17,9 @@ export const appRouters : Routes = [
   {path : "", component : LoginComponent},
   {path : "login", component : LoginComponent},
   {path : "home", component : HomeComponent},
-  {path : "showusers", component : UsuarioComponent}
+  {path : "showusers", component : UsuarioComponent},
+  {path : "addUser", component : UsuarioAddComponent},
+  {path : "addUser/:id", component : UsuarioAddComponent}
 ]
 
   /* IMPORTANT: Exportando para dentro do app.Module o Array de Rotas URI do sistema */
@@ -27,7 +30,8 @@ export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(a
     AppComponent,
     HomeComponent,
     LoginComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    UsuarioAddComponent
   ],
   imports: [
     BrowserModule,

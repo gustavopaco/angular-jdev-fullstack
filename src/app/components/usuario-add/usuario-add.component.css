@@ -1,0 +1,18 @@
+.addUsuarioContent {
+  /*border: 1px solid green;*/
+  position: relative;
+  max-width: 50%;
+  margin-top: 10%;
+  left: 25%;
+  right: 25%;
+  padding: 0;
+  /*transform: translateX(+798px);*/
+}
+
+.paddingLogin {
+  padding-left: 18%;
+}
+
+.center-formV {
+  padding-top: 5%;
+}

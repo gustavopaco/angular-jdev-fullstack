@@ -27,4 +27,9 @@ export class UsuarioService {
     const url = `${AppConstants.baseUsuario()}/${id}`;
     return this.http.delete(url);
   }
+
+  public findUserByName(nome : String) : Observable<any> {
+    const url = `${AppConstants.baseUsuario()}?nome=${nome}`;
+    return this.http.get<Usuario[]>(url);
+  }
 }
