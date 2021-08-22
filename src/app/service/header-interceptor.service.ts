@@ -13,6 +13,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
 
       const cloned = request.clone({
       headers : request.headers.set("Authorization", token)
+        // .set("Access-Control-Allow-Origin","*").set("Access-Control-Allow-Headers","*").set("Access-Control-Allow-Methods", "*") /* Habilitar em caso de necessidade*/
       });
       return next.handle(cloned);
     } else {

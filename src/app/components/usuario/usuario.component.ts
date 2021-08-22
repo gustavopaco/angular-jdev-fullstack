@@ -21,4 +21,12 @@ export class UsuarioComponent implements OnInit {
       this.usuarios = response;
     })
   }
+
+  public deleteUsuario(id : Number) {
+    this.usuarioService.deleteUserByID(id).subscribe(() => {
+        this.usuarioService.findAllUsers().subscribe(atualizarLista => {
+          this.usuarios = atualizarLista;
+      })
+    })
+  }
 }

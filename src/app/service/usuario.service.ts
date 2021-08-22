@@ -21,6 +21,10 @@ export class UsuarioService {
     const url = `${AppConstants.baseUsuario()}/v1`;
     // return this.http.get<Usuario[]>(url, {headers : headers}); /* Passando o Header como parametro com o Authorization */
     return this.http.get<Usuario[]>(url);
+  }
 
+  public deleteUserByID(id : Number) : Observable<any> {
+    const url = `${AppConstants.baseUsuario()}/${id}`;
+    return this.http.delete(url);
   }
 }
