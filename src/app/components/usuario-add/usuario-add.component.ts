@@ -40,11 +40,13 @@ export class UsuarioAddComponent implements OnInit {
 
     if (this.usuario.id === undefined){
       this.usuarioService.registerUser(this.usuario).subscribe(response => {
-        localStorage.setItem("token", JSON.parse(JSON.stringify(response)).body.jwt)
+        localStorage.setItem("token", JSON.parse(JSON.stringify(response)).body.jwt);
+        this.routes.navigate(["/home"]);
       })
     } else {
       this.usuarioService.updateUser(this.usuario).subscribe(() => {
         console.log("Usuario atualizado com sucesso");
+        this.routes.navigate(["/showusers"]);
       })
     }
   }

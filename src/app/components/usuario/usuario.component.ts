@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from "../../service/usuario.service";
 import {Usuario} from "../../model/usuario";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-usuario',
@@ -9,18 +10,25 @@ import {Usuario} from "../../model/usuario";
 })
 export class UsuarioComponent implements OnInit {
 
-  usuarioService: UsuarioService
+  usuarioService: UsuarioService;
   usuarios: Usuario[];
-  nomeUsuario: String
+  nomeUsuario: String;
+  private routes : Router
 
-  constructor(usuarioService: UsuarioService) {
+  constructor(usuarioService: UsuarioService, routes : Router) {
     this.usuarioService = usuarioService;
+    this.routes = routes;
   }
 
   ngOnInit(): void {
-    this.usuarioService.findAllUsers().subscribe(response => {
-      this.usuarios = response;
-    })
+    const token = localStorage.getItem("token");
+    if (token === null) {
+      this.routes.navigate(["/login"]);
+    } else {
+      this.usuarioService.findAllUsers().subscribe(response => {
+        this.usuarios = response;
+      })
+    }
   }
 
   public deleteUsuario(id: Number) {

@@ -1,3 +1,18 @@
-form {
-  padding: 15% 40% 10% 40%;
+/*form {*/
+/*  padding: 15% 40% 10% 40%;*/
+/*}*/
+
+.loginPosicao {
+  position: relative;
+  max-width: 30%;
+  left: 35%;
+  right: 35%;
+  margin-top: 15%;
+}
+
+.centerformLogin {
+  margin-left: 21%;
+  padding: 10px;
+  /*border: 2px solid green;*/
+  max-width: 60%;
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  private routes : Router;
+
+  constructor(routes : Router) {
+    this.routes = routes;
+  }
 
   ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    if (token === null) {
+      this.routes.navigate(["/login"]);
+    }
   }
 
 }

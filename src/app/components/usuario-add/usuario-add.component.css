@@ -10,9 +10,14 @@
 }
 
 .paddingLogin {
-  padding-left: 18.5%;
+  padding-left: 18%;
 }
 
 .center-formV {
   padding-top: 5%;
+}
+
+.appendValidateRequired {
+  color: red;
+  font-size: 23px;
 }

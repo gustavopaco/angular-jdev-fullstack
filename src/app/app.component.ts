@@ -15,12 +15,10 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
   }
 
   public logout() {
     localStorage.clear();
-    this.routes.navigate(["/login"]);
   }
 
   public goHome() {
@@ -38,5 +36,11 @@ export class AppComponent implements OnInit{
     } else {
       this.routes.navigate(["/login"]);
     }
+  }
+
+  public esconderMenu() {
+    const token = localStorage.getItem("token");
+    return token !== null;
+
   }
 }

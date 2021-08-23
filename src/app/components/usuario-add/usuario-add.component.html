@@ -1,55 +1,60 @@
 <p>Tela Usuario ADD</p>
 <div class="addUsuarioContent">
   <div class="shadow-lg p-3 mb-5 bg-light rounded" style="min-height: 450px;">
-    <form action="" class="center-formV">
+    <form action="" class="center-formV" #formValidate="ngForm">
       <div class="row mb-3">
         <div class="form-group col-md-1">
           <label for="usuarioID" class="visually-hidden">ID</label>
-          <input type="hidden" class="form-control" id="usuarioID"  name="usuarioID" readonly [(ngModel)]="usuario.id">
+          <input type="hidden" class="form-control" id="usuarioID" name="usuarioID" readonly [(ngModel)]="usuario.id">
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="form-group col-md-5">
-          <label for="nome" class="form-label">Name:</label>
+          <label for="nome" class="form-label">Name</label>
+          <span class="appendValidateRequired" *ngIf="nomeValidate.invalid"> *</span>
           <input type="text" class="form-control" id="nome" name="nome" required="required"
-                 placeholder="Digit your name..." [(ngModel)]="usuario.nome">
+                 placeholder="Digit your name..." [(ngModel)]="usuario.nome" #nomeValidate="ngModel">
         </div>
         <div class="form-group col-md-3">
-          <label for="cpf" class="form-label">SSN:</label>
+          <label for="cpf" class="form-label">SSN</label>
+          <span class="appendValidateRequired" *ngIf="cpfValidate.invalid"> *</span>
           <input type="text" class="form-control" id="cpf" name="cpf" required="required"
-                 placeholder="Inform your SSN..." [(ngModel)]="usuario.cpf">
+                 placeholder="Inform your SSN..." [(ngModel)]="usuario.cpf" #cpfValidate="ngModel">
         </div>
       </div>
       <div class="row mb-3">
         <div class="form-group col-md-6 paddingLogin">
-          <label for="username" class="form-label">Login:</label>
+          <label for="username" class="form-label">Login</label>
+          <span class="appendValidateRequired" *ngIf="usernameValidate.invalid"> *</span>
           <input type="text" class="form-control" id="username" name="username" required="required"
-                 placeholder="Create your login" [(ngModel)]="usuario.username">
+                 placeholder="Create your login" [(ngModel)]="usuario.username" #usernameValidate="ngModel">
         </div>
       </div>
-      <div class="form-group col-md-4" *ngIf="usuario.id === undefined">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required="required"
-               placeholder="Digit your password" [(ngModel)]="usuario.password">
-      </div>
-      <div class="row mb-3 justify-content-center" >
+      <div class="row mb-3 justify-content-center">
+        <div class="form-group col-md-4" *ngIf="usuario.id === undefined">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="password" name="password" required="required"
+                 placeholder="Digit your password" [(ngModel)]="usuario.password">
+        </div>
         <div class="form-group col-md-4" *ngIf="usuario.id !== undefined">
           <label for="newPassword" class="form-label">New password:</label>
-          <input type="password" class="form-control" id="newPassword" name="new Password" required="required"
+          <input type="password" class="form-control" id="newPassword" name="new Password"
                  placeholder="New password" [(ngModel)]="usuario.newPassword">
         </div>
         <div class="form-group col-md-4">
           <label for="repeatPassword" class="form-label">Repeat password:</label>
-          <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required="required"
+          <input type="password" class="form-control" id="repeatPassword" name="repeatPassword"
                  placeholder="Repeat your password" [(ngModel)]="usuario.reapeatPassword">
         </div>
       </div>
       <div class="row mb-3">
         <div class="form-group col-md-4 paddingLogin">
-          <button type="button" class="btn btn-success btn-lg" (click)="saveUser()">Confirm</button>
+          <button type="button" class="btn btn-primary btn-lg" (click)="saveUser()" [disabled]="formValidate.invalid">
+            Confirm
+          </button>
         </div>
         <div class="form-group col-md-4">
-          <button type="button" class="btn btn-secondary btn-lg" (click)="back()">Back</button>
+          <button type="button" class="btn btn-primary btn-lg" (click)="back()">Back</button>
         </div>
       </div>
     </form>

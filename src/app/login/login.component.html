@@ -1,27 +1,39 @@
-<form action="">
-  <div class="form-text mb-3"><h3>Login</h3></div>
-  <div class="mb-3">
-    <label class="form-label" for="username">Email:</label>
-    <input class="form-control" type="text" id="username" name="username" placeholder="Informe o username"
-           required="required" #username="ngModel" [(ngModel)]="usuario.username" >
-    <!--    <div class="mb-3 form-text alert alert-danger" *ngIf="username.invalid">-->
-    <!--      Login deve ser informado-->
-    <!--    </div>-->
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="password">Password:</label>
-    <input class="form-control" type="text" id="password" name="password" placeholder="Informe o password"
-           required="required" #password="ngModel" [(ngModel)]="usuario.password">
-    <!--    <div class="form-text alert alert-danger" *ngIf="password.invalid">-->
-    <!--      Password deve ser informado-->
-    <!--    </div>-->
-  </div>
-  <div class="row mb-3">
-    <div class="col-auto">
-  <button type="button" [disabled]="username.invalid || password.invalid" class="btn btn-primary" (click)="sigIn()">Sign in</button>
+<div class="loginPosicao shadow-lg p-3 mb-5 bg-light rounded">
+  <form action="" class="centerformLogin">
+    <div class="form-text row mb-3">
+      <div class="form-group col-md-5">
+        <h3>Login</h3>
+      </div>
     </div>
-    <div class="col-auto">
-  <button type="button" class="btn btn-success" [routerLink]="['/addUser']">Sign Up</button>
+    <div class=" row mb-3">
+      <div class="form-group col-md-12">
+        <label class="form-label" for="username">Email:</label>
+        <input class="form-control" type="text" id="username" name="username" placeholder="Informe o username"
+               required="required" #username="ngModel" [(ngModel)]="usuario.username">
+        <!--    <div class="mb-3 form-text alert alert-danger" *ngIf="username.invalid">-->
+        <!--      Login deve ser informado-->
+        <!--    </div>-->
+      </div>
     </div>
-  </div>
-</form>
+    <div class=" row mb-3">
+      <div class="form-group col-md-12">
+        <label class="form-label" for="password">Password:</label>
+        <input class="form-control" type="password" id="password" name="password" placeholder="Informe o password"
+               required="required" #password="ngModel" [(ngModel)]="usuario.password">
+        <!--    <div class="form-text alert alert-danger" *ngIf="password.invalid">-->
+        <!--      Password deve ser informado-->
+        <!--    </div>-->
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-auto">
+        <button type="button" [disabled]="username.invalid || password.invalid" class="btn btn-primary"
+                (click)="sigIn()">Sign in
+        </button>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-success" [routerLink]="['/addUser']">Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div>
