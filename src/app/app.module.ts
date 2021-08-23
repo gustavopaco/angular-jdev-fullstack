@@ -10,16 +10,17 @@ import {LoginComponent} from './login/login.component';
 import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {HeaderInterceptorService} from "./service/header-interceptor.service";
 import { UsuarioAddComponent } from './components/usuario-add/usuario-add.component';
+import {SecurityGuard} from "./service/security.guard";
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
 export const appRouters : Routes = [
   {path : "", component : LoginComponent},
   {path : "login", component : LoginComponent},
-  {path : "home", component : HomeComponent},
-  {path : "showusers", component : UsuarioComponent},
+  {path : "home", component : HomeComponent, canActivate : [SecurityGuard]},
+  {path : "showusers", component : UsuarioComponent, canActivate : [SecurityGuard]},
   {path : "addUser", component : UsuarioAddComponent},
-  {path : "addUser/:id", component : UsuarioAddComponent}
+  {path : "addUser/:id", component : UsuarioAddComponent, canActivate : [SecurityGuard]}
 ]
 
   /* IMPORTANT: Exportando para dentro do app.Module o Array de Rotas URI do sistema */

@@ -46,4 +46,8 @@ export class UsuarioService {
   public updateUser(usuario : Usuario) : Observable<any> {
     return this.http.put(AppConstants.baseUsuario(), usuario)
   }
+
+  public userAuthenticated() {
+    return localStorage.getItem("token") !== null;
+  }
 }

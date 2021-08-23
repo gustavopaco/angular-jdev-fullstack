@@ -25,7 +25,6 @@ export class UsuarioAddComponent implements OnInit {
     let id = this.router.snapshot.paramMap.get("id");
 
     if (id != null) {
-      console.log(`Valor sendo Editado: ${id}`);
       this.findUserByID(id)
     }
   }
