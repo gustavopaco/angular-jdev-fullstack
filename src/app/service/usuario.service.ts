@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AppConstants} from "../app-constants";
 import {Observable} from "rxjs";
 import {Usuario} from "../model/usuario";
@@ -31,5 +31,19 @@ export class UsuarioService {
   public findUserByName(nome : String) : Observable<any> {
     const url = `${AppConstants.baseUsuario()}?nome=${nome}`;
     return this.http.get<Usuario[]>(url);
+  }
+
+  public findUserByID(id : String) : Observable<any>{
+    const url = `${AppConstants.baseUsuario()}/${id}`;
+    const cabecalho = new HttpHeaders().set("X-API-Version","v1"); /* Setando Authorization no Header*/
+    return this.http.get<Usuario>(url, {headers : cabecalho});
+  }
+
+  public registerUser(usuario : Usuario) : Observable<any> {
+    return this.http.post(AppConstants.baseUsuario(), usuario,{observe : "response"})
+  }
+
+  public updateUser(usuario : Usuario) : Observable<any> {
+    return this.http.put(AppConstants.baseUsuario(), usuario)
   }
 }

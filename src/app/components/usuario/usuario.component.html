@@ -1,15 +1,6 @@
 <h1>TELA DE USUARIOS</h1>
-<!--<div class="relativeParent">-->
-<!--  <form class="row g-3 rearrangeDiv">-->
-<!--    <div class="col-auto">-->
-<!--      <label for="nomeUsuario" class="visually-hidden">Nome Usuario</label>-->
-<!--      <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" [(ngModel)]="nomeUsuario"-->
-<!--             placeholder="Digite o nome" (keyup)="findUserByName($event)" >-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
-<table class="table table-dark table-hover table-striped table-responsive">
-  <thead>
+<table class="table tableCustomizada table-hover table-striped table-responsive">
+  <thead  style="padding: 0">
   <tr>
     <th scope="col">ID:</th>
     <th scope="col">Nome:</th>
@@ -19,7 +10,7 @@
     <th scope="col">
       <form class="rearrangeDiv">
 <!--        <div class="col-12">-->
-          <label for="nomeUsuario" class="visually-hidden">Nome Usuario</label>
+<!--          <label for="nomeUsuario" >Nome Usuario</label>-->
           <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" [(ngModel)]="nomeUsuario"
                  placeholder="Digite o nome" (keyup)="findUserByName($event)">
 <!--        </div>-->
@@ -40,7 +31,6 @@
     <td>
       <button class="btn btn-warning" type="button" [routerLink]="['/addUser',user.id]">Editar</button>
     </td>
-    <td></td>
   </tr>
   </tbody>
 </table>

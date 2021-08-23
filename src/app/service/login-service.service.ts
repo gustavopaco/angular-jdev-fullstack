@@ -19,8 +19,6 @@ export class LoginServiceService {
   }
 
   public signIn(usuario : Usuario) {
-    console.log("Login: " + usuario.username);
-    console.log("Senha" + usuario.password)
     return this.http.post(AppConstants.baseLogin(), JSON.stringify(usuario)).subscribe(response => {
 
       /* Retorno Http */

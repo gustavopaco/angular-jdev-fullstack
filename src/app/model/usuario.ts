@@ -1,3 +1,5 @@
+import {Role} from "./role";
+
 export class Usuario {
 
   id: Number;
@@ -5,6 +7,9 @@ export class Usuario {
   username: String;
   password: String;
   cpf: String;
+  newPassword : String;
+  reapeatPassword : String;
+  roles : Array<Role> = [];
 
 
   constructor() {

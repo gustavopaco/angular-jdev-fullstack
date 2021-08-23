@@ -1,58 +1,23 @@
-.table-yellow {
-  --bs-table-bg: #212529;
-  --bs-table-striped-bg: #2c3034;
-  --bs-table-striped-color: #fff;
-  --bs-table-active-bg: #373b3e;
-  --bs-table-active-color: #fff;
-  --bs-table-hover-bg: #FFFF00;
-  --bs-table-hover-color: #A020F0;
-  color: #fff;
-  border-color: #373b3e;
-}
-
-.table-dark {
-  --bs-table-bg: #212529;
-  --bs-table-striped-bg: #2c3034;
-  --bs-table-striped-color: #fff;
-  --bs-table-active-bg: #373b3e;
-  --bs-table-active-color: #fff;
-  --bs-table-hover-bg: #98FB98;
-  --bs-table-hover-color: #A020F0;
-  color: #fff;
-  border-color: #373b3e;
-}
-
 .rearrangeDiv {
-  /*position: relative;*/
-  /*max-width: max-content;*/
-  /*left: 100%;*/
   padding: 0;
   max-width: fit-content;
-  /*padding-bottom: 1%;*/
-  /*transform: translateY(100%) translateX(-99%);*/
 }
 
-.relativeParent {
-  max-width: 100%;
-}
-
-.rearrangeDiv2 {
-  position: relative;
-  min-width: 100%;
-  max-width: 100%;
-  left: 100%;
-  transform: translateX(-99%);
-}
-
-.relativeParent2 {
-  max-width: 50%;
-}
-
-.table > :not(caption) > * > * {
-  padding: 20px 0 20px 0;
-  background-color: var(--bs-table-bg);
-  border-bottom-width: 1px;
+.tableCustomizada{
+  min-width: 100%;background-color: var(--bs-table-bg);
   box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+
+  --bs-table-bg: rgba(33, 37, 41, 0);
+  --bs-table-striped-bg: rgba(44, 48, 52, 0.3);
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: #373b3e;
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: #ecff5e;
+  --bs-table-hover-color: rgba(33, 37, 41, 0.97);
+  color: #fff;
 }
 
-
+td {
+  display: table-cell;
+  vertical-align: middle;
+}

@@ -4,49 +4,55 @@
     <form action="" class="center-formV">
       <div class="row mb-3">
         <div class="form-group col-md-1">
-          <label for="id" class="visually-hidden">ID</label>
-          <input type="hidden" class="form-control" id="id" name="id" readonly [autocomplete]="false">
+          <label for="usuarioID" class="visually-hidden">ID</label>
+          <input type="hidden" class="form-control" id="usuarioID"  name="usuarioID" readonly [(ngModel)]="usuario.id">
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="form-group col-md-5">
           <label for="nome" class="form-label">Name:</label>
           <input type="text" class="form-control" id="nome" name="nome" required="required"
-                 placeholder="Digit your name...">
+                 placeholder="Digit your name..." [(ngModel)]="usuario.nome">
         </div>
         <div class="form-group col-md-3">
           <label for="cpf" class="form-label">SSN:</label>
           <input type="text" class="form-control" id="cpf" name="cpf" required="required"
-                 placeholder="Inform your SSN...">
+                 placeholder="Inform your SSN..." [(ngModel)]="usuario.cpf">
         </div>
       </div>
       <div class="row mb-3">
         <div class="form-group col-md-6 paddingLogin">
           <label for="username" class="form-label">Login:</label>
           <input type="text" class="form-control" id="username" name="username" required="required"
-                 placeholder="Create your login">
+                 placeholder="Create your login" [(ngModel)]="usuario.username">
         </div>
       </div>
-      <div class="row mb-3 justify-content-center">
-        <div class="form-group col-md-4">
-          <label for="password" class="form-label">New password:</label>
-          <input type="password" class="form-control" id="password" name="password" required="required"
-                 placeholder="New password">
+      <div class="form-group col-md-4" *ngIf="usuario.id === undefined">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required="required"
+               placeholder="Digit your password" [(ngModel)]="usuario.password">
+      </div>
+      <div class="row mb-3 justify-content-center" >
+        <div class="form-group col-md-4" *ngIf="usuario.id !== undefined">
+          <label for="newPassword" class="form-label">New password:</label>
+          <input type="password" class="form-control" id="newPassword" name="new Password" required="required"
+                 placeholder="New password" [(ngModel)]="usuario.newPassword">
         </div>
         <div class="form-group col-md-4">
-          <label for="confirmpassword" class="form-label">Repeat password:</label>
-          <input type="password" class="form-control" id="confirmpassword" name="password" required="required"
-                 placeholder="Repeat your password">
+          <label for="repeatPassword" class="form-label">Repeat password:</label>
+          <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required="required"
+                 placeholder="Repeat your password" [(ngModel)]="usuario.reapeatPassword">
         </div>
       </div>
       <div class="row mb-3">
         <div class="form-group col-md-4 paddingLogin">
-          <button type="button" class="btn btn-success">Confirm</button>
+          <button type="button" class="btn btn-success btn-lg" (click)="saveUser()">Confirm</button>
         </div>
         <div class="form-group col-md-4">
-          <button type="button" class="btn btn-secondary">Back</button>
+          <button type="button" class="btn btn-secondary btn-lg" (click)="back()">Back</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
