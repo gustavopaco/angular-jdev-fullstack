@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UsuarioService} from "../../service/usuario.service";
 import {Usuario} from "../../model/usuario";
+import {TelefoneService} from "../../service/telefone.service";
 
 @Component({
   selector: 'app-usuario-add',
@@ -12,13 +13,15 @@ export class UsuarioAddComponent implements OnInit {
 
   private router: ActivatedRoute;
   private usuarioService: UsuarioService;
+  private telefoneService : TelefoneService;
   private routes: Router;
   usuario = new Usuario();
 
-  constructor(router: ActivatedRoute, usuarioService: UsuarioService, routes: Router) {
+  constructor(router: ActivatedRoute, usuarioService: UsuarioService, routes: Router, telefoneService : TelefoneService) {
     this.router = router;
     this.usuarioService = usuarioService;
     this.routes = routes;
+    this.telefoneService = telefoneService;
   }
 
   ngOnInit(): void {
@@ -58,4 +61,12 @@ export class UsuarioAddComponent implements OnInit {
     }
   }
 
+  public deletarTelefone(id : Number) {
+    if (confirm("Tem certeza que deseja deletar esse Telefone?")) {
+      this.telefoneService.deletarTelefone(id).subscribe(() => {
+        console.info("Telefone foi deletado");
+        this.ngOnInit();
+      })
+    }
+  }
 }

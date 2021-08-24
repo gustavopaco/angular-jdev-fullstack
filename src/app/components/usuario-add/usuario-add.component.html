@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="form-group col-md-4 paddingLogin">
+        <div class="form-group col-md-4 offset-2">
           <button type="button" class="btn btn-primary btn-lg" (click)="saveUser()" [disabled]="formValidate.invalid">
             Confirm
           </button>
@@ -58,6 +58,43 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+
+
+<div class=" card text-center telefoneDiv" *ngIf="usuario.id !== undefined">
+  <div class="card-header">
+    <div class="row mb-3">
+      <div class="col-md-2 my-1 ">
+        <button class="btn btn-success col-md-12">Adicionar</button>
+      </div>
+      <div class="col-md-7 ms-md-5 pt-2">
+        <span class="text-dark tituloCardTelefone">Telefones</span>
+      </div>
+      <span class="border-bottom"></span>
+    </div>
+    <table class="table table-hover tableCustomTelefone table-striped">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Numero</th>
+        <th scope="col">
+          <div class="col-md-3 offset-lg-5 mt-sm-2">
+            <input class="form-control" type="text" placeholder="Informe algum telefone">
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let fone of usuario.telefones">
+        <td>{{fone.id}}</td>
+        <td>{{fone.numero}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deletarTelefone(fone.id)">Deletar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

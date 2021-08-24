@@ -1,4 +1,5 @@
 import {Role} from "./role";
+import {Telefone} from "./telefone";
 
 export class Usuario {
 
@@ -10,7 +11,7 @@ export class Usuario {
   newPassword : String;
   reapeatPassword : String;
   roles : Array<Role> = [];
-
+  telefones : Array<Telefone> = []
 
   constructor() {
   }
