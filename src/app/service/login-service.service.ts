@@ -27,14 +27,11 @@ export class LoginServiceService {
       /*Gravando o token na sessao*/
       localStorage.setItem("token", token);
 
-      // console.info(`Token: ${localStorage.getItem("token")}`);
-
       /*Navegando para a URI home em caso de sucesso.*/
       this.routes.navigate(["home"]);
 
     }, error => {
-        console.error("Erro ao fazer login");
-        alert("Acesso negado");
+        alert("Acesso negado\n");
         AppComponent.arguments.msgUsuarioError = "Usuario ou senha Invalidos";
     })
   }}
