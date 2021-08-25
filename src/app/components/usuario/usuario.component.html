@@ -26,10 +26,10 @@
     <td>{{user.nome}}</td>
     <td>{{user.cpf}}</td>
     <td>
-      <button class="btn btn-danger" type="button" (click)="deleteUsuario(user.id)">Deletar</button>
+      <button class="btn btn-danger" type="button" (click)="deleteUsuario(user.id)">Delete</button>
     </td>
     <td>
-      <button class="btn btn-warning" type="button" [routerLink]="['/addUser',user.id]">Editar</button>
+      <button class="btn btn-warning" type="button" [routerLink]="['/addUser',user.id]">Edit</button>
     </td>
   </tr>
   </tbody>

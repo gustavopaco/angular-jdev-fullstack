@@ -66,10 +66,12 @@
   <div class="card-header">
     <div class="row mb-3">
       <div class="col-md-2 my-1 ">
-        <button class="btn btn-success col-md-12">Adicionar</button>
+        <button type="button" (click)="open(content)" class="btn btn-success col-md-12">
+          Register phone
+        </button>
       </div>
       <div class="col-md-7 ms-md-5 pt-2">
-        <span class="text-dark tituloCardTelefone">Telefones</span>
+        <span class="text-dark tituloCardTelefone">Telephones</span>
       </div>
       <span class="border-bottom"></span>
     </div>
@@ -77,10 +79,10 @@
       <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Numero</th>
+        <th scope="col">Number</th>
         <th scope="col">
           <div class="col-md-3 offset-lg-5 mt-sm-2">
-            <input class="form-control" type="text" placeholder="Informe algum telefone">
+            <input class="form-control" type="text" placeholder="Search">
           </div>
         </th>
       </tr>
@@ -90,7 +92,7 @@
         <td>{{fone.id}}</td>
         <td>{{fone.numero}}</td>
         <td>
-          <button class="btn btn-danger" (click)="deletarTelefone(fone.id)">Deletar</button>
+          <button class="btn btn-danger" (click)="deletarTelefone(fone.id)">Delete</button>
         </td>
       </tr>
       </tbody>
@@ -98,3 +100,30 @@
   </div>
 </div>
 
+<!-- Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">New Phone</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="row mb-3">
+            <div class="form-group col-md-7 offset-3">
+              <label for="numeroTel" class="form-label">Number:</label>
+              <span class="appendValidateRequired" *ngIf="numeroTel.invalid"> *</span>
+              <input type="text" class="form-control" id="numeroTel" name="numeroTel" required="required"
+                     placeholder="Digit your phone..." [(ngModel)]="telefone.numero" #numeroTel="ngModel">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="numeroTel.invalid" (click)="addNewPhone()">Save</button>
+        <button type="button" class="btn btn-primary" (click)="c('Cancel')">Cancel</button>
+      </div>
+  </div>
+</ng-template>

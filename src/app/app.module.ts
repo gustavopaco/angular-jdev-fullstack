@@ -9,8 +9,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from './login/login.component';
 import {UsuarioComponent} from "./components/usuario/usuario.component";
 import {HeaderInterceptorService} from "./service/header-interceptor.service";
-import { UsuarioAddComponent } from './components/usuario-add/usuario-add.component';
+import {UsuarioAddComponent} from './components/usuario-add/usuario-add.component';
 import {SecurityGuard} from "./service/security.guard";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -35,6 +36,7 @@ export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(a
     UsuarioAddComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     routes,
     HttpClientModule, /*IMPORTANT: Modulo de realizar requisicoes AJAX */
