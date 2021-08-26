@@ -1,5 +1,6 @@
 import {Role} from "./role";
 import {Telefone} from "./telefone";
+import {Profissao} from "./profissao";
 
 export class Usuario {
 
@@ -13,8 +14,8 @@ export class Usuario {
   roles : Array<Role> = [];
   telefones : Array<Telefone> = [];
   dataNascimento : String;
+  profissao : Profissao =  new Profissao();
+  salario : DoubleRange;
 
-  constructor() {
-  }
 
 }

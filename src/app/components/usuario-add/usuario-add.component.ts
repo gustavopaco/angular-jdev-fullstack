@@ -11,6 +11,8 @@ import {
   NgbModal,
   NgbModalConfig
 } from "@ng-bootstrap/ng-bootstrap";
+import {Profissao} from "../../model/profissao";
+import {ProfissaoService} from "../../service/profissao.service";
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -73,21 +75,27 @@ export class UsuarioAddComponent implements OnInit {
   private router: ActivatedRoute;
   private usuarioService: UsuarioService;
   private telefoneService: TelefoneService;
+  private profissaoService : ProfissaoService;
   private routes: Router;
   usuario = new Usuario();
   telefone = new Telefone();
+  profissoes : Array<Profissao>;
 
 
-  constructor(router: ActivatedRoute, usuarioService: UsuarioService, routes: Router, telefoneService: TelefoneService, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(router: ActivatedRoute, usuarioService: UsuarioService,
+              routes: Router, telefoneService: TelefoneService,
+              private modalService: NgbModal, config: NgbModalConfig, profissaoService : ProfissaoService) {
     this.router = router;
     this.usuarioService = usuarioService;
     this.routes = routes;
     this.telefoneService = telefoneService;
     config.backdrop = "static";
     config.keyboard = false;
+    this.profissaoService = profissaoService;
   }
 
   ngOnInit(): void {
+    this.getProfissoes();
     let id = this.router.snapshot.paramMap.get("id");
 
     if (id != null) {
@@ -98,6 +106,9 @@ export class UsuarioAddComponent implements OnInit {
   public findUserByID(id: String) {
     this.usuarioService.findUserByID(id).subscribe(response => {
       this.usuario = response;
+      if (this.usuario.profissao === null) {
+        this.usuario.profissao = new Profissao();
+      }
     });
   }
 
@@ -145,5 +156,11 @@ export class UsuarioAddComponent implements OnInit {
 
   open(content: any) {
     this.modalService.open(content, {centered: true});
+  }
+
+  getProfissoes() {
+    this.profissaoService.getProfissoes().subscribe(response => {
+      this.profissoes = response;
+    })
   }
 }

@@ -33,7 +33,7 @@ export class UsuarioComponent implements OnInit {
         this.usuarios = response.content;
         this.numberOfElements = response.numberOfElements;
         this.totalElements = response.totalElements;
-        this.totalPages = response.totalPages
+        this.totalPages = response.totalPages;
       })
     }
   }

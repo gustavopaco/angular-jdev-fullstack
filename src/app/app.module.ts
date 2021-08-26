@@ -14,6 +14,7 @@ import {SecurityGuard} from "./service/security.guard";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {IConfig, NgxMaskModule} from "ngx-mask";
 import {NgxPaginationModule} from "ngx-pagination";
+import {NgxCurrencyModule} from "ngx-currency";
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -39,6 +40,7 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
     UsuarioAddComponent
   ],
   imports: [
+    NgxCurrencyModule,
     NgxPaginationModule,  /* Modulo de Paginacao */
     NgxMaskModule.forRoot(optionsMask), /* Modulo de Mascara de Telefone-CPF...etc */
     NgbModule,  /* Modulo para Modal */

@@ -18,4 +18,7 @@ export class AppConstants {
     return `${this.getSERVERURL()}/telefone`
   }
 
+  public static baseProfissao() : string {
+   return `${this.getSERVERURL()}/profissao`;
+  }
 }
