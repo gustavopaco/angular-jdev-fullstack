@@ -11,7 +11,8 @@ export class Usuario {
   newPassword : String;
   reapeatPassword : String;
   roles : Array<Role> = [];
-  telefones : Array<Telefone> = []
+  telefones : Array<Telefone> = [];
+  dataNascimento : String;
 
   constructor() {
   }

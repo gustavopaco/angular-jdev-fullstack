@@ -1,16 +1,72 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UsuarioService} from "../../service/usuario.service";
 import {Usuario} from "../../model/usuario";
 import {TelefoneService} from "../../service/telefone.service";
 import {Telefone} from "../../model/telefone";
-import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+  NgbDateStruct,
+  NgbModal,
+  NgbModalConfig
+} from "@ng-bootstrap/ng-bootstrap";
+
+@Injectable()
+export class CustomAdapter extends NgbDateAdapter<string> {
+
+  readonly DELIMITER = '/';   /* Delimitador de data */
+
+  fromModel(value: string | null): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day : parseInt(date[0],10),
+        month : parseInt(date[1],10),
+        year : parseInt(date[2],10)
+      };
+    }
+    return null;
+  }
+
+  toModel(date: NgbDateStruct | null): string | null {
+    return date ? validarDiaMes(date.day) + this.DELIMITER + validarDiaMes(date.month) + this.DELIMITER + date.year : null;
+  }
+}
+
+@Injectable()
+export class FormataData extends NgbDateParserFormatter {
+  readonly DELIMITER = '/';   /* Delimitador de data */
+  format(date: NgbDateStruct | null): string {
+    return date ? validarDiaMes(date.day) + this.DELIMITER + validarDiaMes(date.month) + this.DELIMITER + date.year : '';
+  }
+
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day : parseInt(date[0],10),
+        month : parseInt(date[1],10),
+        year : parseInt(date[2],10)
+      };
+    }
+    return null;
+  }
+}
+
+function validarDiaMes(valor :any) {
+  if (valor !== undefined && valor <= 9) {
+    return "0" + valor
+  } else {
+    return valor;
+  }
+}
 
 @Component({
   selector: 'app-usuario-add',
   templateUrl: './usuario-add.component.html',
   styleUrls: ['./usuario-add.component.css'],
-  providers: [NgbModalConfig, NgbModal]
+  providers: [{provide: NgbDateAdapter, useClass: CustomAdapter},{provide : NgbDateParserFormatter, useClass : FormataData}, NgbModalConfig, NgbModal]
 })
 export class UsuarioAddComponent implements OnInit {
 
@@ -46,7 +102,7 @@ export class UsuarioAddComponent implements OnInit {
   }
 
   public saveUser() {
-
+    console.info(this.usuario)
     if (this.usuario.id === undefined) {
       this.usuarioService.registerUser(this.usuario).subscribe(response => {
         localStorage.setItem("token", JSON.parse(JSON.stringify(response)).body.jwt);

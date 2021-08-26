@@ -19,16 +19,29 @@
         <div class="form-group col-md-3">
           <label for="cpf" class="form-label">SSN</label>
           <span class="appendValidateRequired" *ngIf="cpfValidate.invalid"> *</span>
-          <input type="text" class="form-control" id="cpf" name="cpf" required="required" [dropSpecialCharacters]="false" mask="000.000.000-00"
+          <input type="text" class="form-control" id="cpf" name="cpf" required="required"
+                 [dropSpecialCharacters]="false" mask="000.000.000-00"
                  placeholder="Inform your SSN..." [(ngModel)]="usuario.cpf" #cpfValidate="ngModel">
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="form-group col-md-6 paddingLogin">
+      <div class="row mb-3 paddingLogin">
+        <div class="form-group col-md-4 mt-sm-auto">
           <label for="username" class="form-label">Login</label>
           <span class="appendValidateRequired" *ngIf="usernameValidate.invalid"> *</span>
           <input type="text" class="form-control" id="username" name="username" required="required"
                  placeholder="Create your login" [(ngModel)]="usuario.username" #usernameValidate="ngModel">
+        </div>
+        <div class="form-group col-md-3 mt-sm-auto offset-2">
+          <label for="dataNascimento" class="form-label">Birthday</label>
+          <!--          <span class="appendValidateRequired" *ngIf="dataNascimento.invalid"> *</span>-->
+          <div class="input-group">
+            <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" required="required"
+                   placeholder="dd/mm/yyyy" [(ngModel)]="usuario.dataNascimento" ngbDatepicker
+                   #dataNascimento="ngbDatepicker">
+              <button class="btn btn-primary" type="button"
+                      (click)=" dataNascimento.minDate = {year: 1950, month: 1, day: 1}; dataNascimento.toggle();">
+              </button>
+          </div>
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
@@ -103,26 +116,27 @@
 
 <!-- Modal -->
 <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal-basic-title">New Phone</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-      </div>
-      <div class="modal-body">
-        <form action="">
-          <div class="row mb-3">
-            <div class="form-group col-md-7 offset-3">
-              <label for="numeroTel" class="form-label">Number:</label>
-              <span class="appendValidateRequired" *ngIf="numeroTel.invalid"> *</span>
-              <input type="text" class="form-control" id="numeroTel" name="numeroTel" required="required" mask="(00) 0000-00009" [dropSpecialCharacters]="false"
-                     placeholder="Digit your phone..." [(ngModel)]="telefone.numero" #numeroTel="ngModel">
-            </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-basic-title">New Phone</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form action="">
+        <div class="row mb-3">
+          <div class="form-group col-md-7 offset-3">
+            <label for="numeroTel" class="form-label">Number:</label>
+            <span class="appendValidateRequired" *ngIf="numeroTel.invalid"> *</span>
+            <input type="text" class="form-control" id="numeroTel" name="numeroTel" required="required"
+                   mask="(00) 0000-00009" [dropSpecialCharacters]="false"
+                   placeholder="Digit your phone..." [(ngModel)]="telefone.numero" #numeroTel="ngModel">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" [disabled]="numeroTel.invalid" (click)="addNewPhone()">Save</button>
-        <button type="button" class="btn btn-primary" (click)="c('Cancel')">Cancel</button>
-      </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" [disabled]="numeroTel.invalid" (click)="addNewPhone()">Save</button>
+      <button type="button" class="btn btn-primary" (click)="c('Cancel')">Cancel</button>
+    </div>
   </div>
 </ng-template>
