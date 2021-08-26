@@ -23,13 +23,18 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(url);
   }
 
+  public loadPageableUsers(currentPage : number) : Observable<any>{
+    const url = `${AppConstants.baseUsuario()}/page?currentPage=${currentPage}`;
+    return this.http.get(url);
+  }
+
   public deleteUserByID(id : Number) : Observable<any> {
     const url = `${AppConstants.baseUsuario()}/${id}`;
     return this.http.delete(url);
   }
 
-  public findUserByName(nome : String) : Observable<any> {
-    const url = `${AppConstants.baseUsuario()}?nome=${nome}`;
+  public findUserByName(currentPage : Number,nome : String) : Observable<any> {
+    const url = `${AppConstants.baseUsuario()}?currentPage=${currentPage}&nome=${nome}`;
     return this.http.get<Usuario[]>(url);
   }
 

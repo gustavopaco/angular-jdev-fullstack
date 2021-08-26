@@ -1,4 +1,5 @@
 <p>Tela Usuario ADD</p>
+<h1>{{'31555555555' | mask:'(00)00000-0000'}}</h1>
 <div class="addUsuarioContent">
   <div class="shadow-lg p-3 mb-5 bg-light rounded" style="min-height: 450px;">
     <form action="" class="center-formV" #formValidate="ngForm">
@@ -18,7 +19,7 @@
         <div class="form-group col-md-3">
           <label for="cpf" class="form-label">SSN</label>
           <span class="appendValidateRequired" *ngIf="cpfValidate.invalid"> *</span>
-          <input type="text" class="form-control" id="cpf" name="cpf" required="required"
+          <input type="text" class="form-control" id="cpf" name="cpf" required="required" [dropSpecialCharacters]="false" mask="000.000.000-00"
                  placeholder="Inform your SSN..." [(ngModel)]="usuario.cpf" #cpfValidate="ngModel">
         </div>
       </div>
@@ -88,11 +89,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let fone of usuario.telefones">
+      <tr *ngFor="let fone of usuario.telefones; let i = index">
         <td>{{fone.id}}</td>
-        <td>{{fone.numero}}</td>
+        <td><span>{{fone.numero}}</span></td>
         <td>
-          <button class="btn btn-danger" (click)="deletarTelefone(fone.id)">Delete</button>
+          <button class="btn btn-danger" (click)="deletarTelefone(fone.id, i)">Delete</button>
         </td>
       </tr>
       </tbody>
@@ -105,9 +106,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modal-basic-title">New Phone</h5>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
       </div>
       <div class="modal-body">
         <form action="">
@@ -115,7 +114,7 @@
             <div class="form-group col-md-7 offset-3">
               <label for="numeroTel" class="form-label">Number:</label>
               <span class="appendValidateRequired" *ngIf="numeroTel.invalid"> *</span>
-              <input type="text" class="form-control" id="numeroTel" name="numeroTel" required="required"
+              <input type="text" class="form-control" id="numeroTel" name="numeroTel" required="required" mask="(00) 0000-00009" [dropSpecialCharacters]="false"
                      placeholder="Digit your phone..." [(ngModel)]="telefone.numero" #numeroTel="ngModel">
             </div>
           </div>

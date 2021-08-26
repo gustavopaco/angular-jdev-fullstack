@@ -16,13 +16,13 @@ export class UsuarioAddComponent implements OnInit {
 
   private router: ActivatedRoute;
   private usuarioService: UsuarioService;
-  private telefoneService : TelefoneService;
+  private telefoneService: TelefoneService;
   private routes: Router;
   usuario = new Usuario();
   telefone = new Telefone();
 
 
-  constructor(router: ActivatedRoute, usuarioService: UsuarioService, routes: Router, telefoneService : TelefoneService, private modalService : NgbModal, config : NgbModalConfig) {
+  constructor(router: ActivatedRoute, usuarioService: UsuarioService, routes: Router, telefoneService: TelefoneService, private modalService: NgbModal, config: NgbModalConfig) {
     this.router = router;
     this.usuarioService = usuarioService;
     this.routes = routes;
@@ -47,7 +47,7 @@ export class UsuarioAddComponent implements OnInit {
 
   public saveUser() {
 
-    if (this.usuario.id === undefined){
+    if (this.usuario.id === undefined) {
       this.usuarioService.registerUser(this.usuario).subscribe(response => {
         localStorage.setItem("token", JSON.parse(JSON.stringify(response)).body.jwt);
         this.routes.navigate(["/home"]);
@@ -68,24 +68,26 @@ export class UsuarioAddComponent implements OnInit {
     }
   }
 
-  public deletarTelefone(id : Number) {
-    if (confirm("Tem certeza que deseja deletar esse Telefone?")) {
+  public deletarTelefone(id: Number, i: any) {
+    if (confirm("Are you sure?")) {
       this.telefoneService.deletarTelefone(id).subscribe(() => {
         console.info("Telefone foi deletado");
         this.ngOnInit();
+        /* console.info("Index do item clicado vindo da tela: " + i) => IMPORTANT: Removendo telefone da tela sem ter que recarregar a Pagina
+        this.usuario.telefones.splice(i,1)*/
       })
     }
   }
 
   public addNewPhone() {
-    this.telefoneService.addNewPhone(this.usuario.id,this.telefone).subscribe(() => {
+    this.telefoneService.addNewPhone(this.usuario.id, this.telefone).subscribe(() => {
       this.telefone = new Telefone();
       this.modalService.dismissAll()
       this.ngOnInit()
     })
   }
 
-  open(content : any) {
-    this.modalService.open(content, {centered : true});
+  open(content: any) {
+    this.modalService.open(content, {centered: true});
   }
 }

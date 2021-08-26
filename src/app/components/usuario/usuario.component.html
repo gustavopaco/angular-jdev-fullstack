@@ -21,7 +21,7 @@
   </thead>
   <tbody>
   <tr>
-  <tr *ngFor="let user of usuarios">
+  <tr *ngFor="let user of usuarios | paginate:{ itemsPerPage : 5, currentPage : currentPage, totalItems :  totalElements}">
     <td>{{user.id}}</td>
     <td>{{user.nome}}</td>
     <td>{{user.cpf}}</td>
@@ -34,3 +34,7 @@
   </tr>
   </tbody>
 </table>
+
+<div class="text-center">
+  <pagination-controls (pageChange)="loadPageableUsers(currentPage = $event)" previousLabel="Back" nextLabel="Next" [responsive]="true"></pagination-controls>
+</div>

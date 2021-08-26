@@ -12,6 +12,8 @@ import {HeaderInterceptorService} from "./service/header-interceptor.service";
 import {UsuarioAddComponent} from './components/usuario-add/usuario-add.component';
 import {SecurityGuard} from "./service/security.guard";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {IConfig, NgxMaskModule} from "ngx-mask";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -26,6 +28,7 @@ export const appRouters : Routes = [
 
   /* IMPORTANT: Exportando para dentro do app.Module o Array de Rotas URI do sistema */
 export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(appRouters);
+export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -36,9 +39,11 @@ export const routes : ModuleWithProviders<RouterModule> = RouterModule.forRoot(a
     UsuarioAddComponent
   ],
   imports: [
-    NgbModule,
+    NgxPaginationModule,  /* Modulo de Paginacao */
+    NgxMaskModule.forRoot(optionsMask), /* Modulo de Mascara de Telefone-CPF...etc */
+    NgbModule,  /* Modulo para Modal */
     BrowserModule,
-    routes,
+    routes, /* Modulo para redirecionar para outras telas */
     HttpClientModule, /*IMPORTANT: Modulo de realizar requisicoes AJAX */
     ReactiveFormsModule,
     FormsModule /* Modulo de formulario para bindar objetos */
