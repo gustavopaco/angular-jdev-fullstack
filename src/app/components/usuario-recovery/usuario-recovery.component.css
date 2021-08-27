@@ -1,0 +1,22 @@
+.recoveryContent {
+  float: left;
+  padding: 10px;
+  height: 980px;
+  width: 100%;
+}
+
+.recoverySubContent {
+  float: left;
+  width: 100%;
+  margin-top: 405px;
+}
+
+.recoveryForm{
+}
+
+.btnRecoveryPositon{
+  position: relative;
+  top: 100%;
+  left: 0;
+  transform: translateY(-38px);
+}

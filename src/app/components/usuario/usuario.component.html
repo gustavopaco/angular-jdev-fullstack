@@ -1,40 +1,51 @@
-<h1>TELA DE USUARIOS</h1>
-<table class="table tableCustomizada table-hover table-striped table-responsive">
-  <thead  style="padding: 0">
-  <tr>
-    <th scope="col">ID:</th>
-    <th scope="col">Nome:</th>
-    <th scope="col">CPF:</th>
-    <th scope="col">Delete:</th>
-    <!--    <th scope="col">Editar:</th>-->
-    <th scope="col">
-      <form class="rearrangeDiv">
-<!--        <div class="col-12">-->
-<!--          <label for="nomeUsuario" >Nome Usuario</label>-->
+<div class=" card text-center mt-1 userTableDiv">
+  <div class="card-header">
+    <div class="row mb-3">
+      <div class="col-md-10 ms-md-5 pt-2">
+        <span class="text-dark tituloCardTelefone">List of Users</span>
+      </div>
+      <span class="border-bottom"></span>
+    </div>
+  </div>
+  <table class="table table-hover tableCustomTelefone table-striped">
+    <thead style="padding: 0">
+    <tr>
+      <th scope="col">ID:</th>
+      <th scope="col">Name:</th>
+      <th scope="col">SSN:</th>
+      <th scope="col">Delete:</th>
+      <!--    <th scope="col">Editar:</th>-->
+      <th scope="col">
+        <form class="rearrangeDiv">
+          <!--        <div class="col-12">-->
+          <!--          <label for="nomeUsuario" >Nome Usuario</label>-->
           <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" [(ngModel)]="nomeUsuario"
-                 placeholder="Digite o nome" (keyup)="findUserByName($event)">
-<!--        </div>-->
-      </form>
-    </th>
+                 placeholder="Search for name" (keyup)="findUserByName($event)">
+          <!--        </div>-->
+        </form>
+      </th>
 
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <tr *ngFor="let user of usuarios | paginate:{ itemsPerPage : 5, currentPage : currentPage, totalItems :  totalElements}">
-    <td>{{user.id}}</td>
-    <td>{{user.nome}}</td>
-    <td>{{user.cpf}}</td>
-    <td>
-      <button class="btn btn-danger" type="button" (click)="deleteUsuario(user.id)">Delete</button>
-    </td>
-    <td>
-      <button class="btn btn-warning" type="button" [routerLink]="['/addUser',user.id]">Edit</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tr
+      *ngFor="let user of usuarios | paginate:{ itemsPerPage : 5, currentPage : currentPage, totalItems :  totalElements}">
+      <td>{{user.id}}</td>
+      <td>{{user.nome}}</td>
+      <td>{{user.cpf}}</td>
+      <td>
+        <button class="btn btn-danger" type="button" (click)="deleteUsuario(user.id)">Delete</button>
+      </td>
+      <td>
+        <button class="btn btn-warning" type="button" [routerLink]="['/addUser',user.id]">Edit</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class="text-center">
-  <pagination-controls (pageChange)="loadPageableUsers(currentPage = $event)" previousLabel="Back" nextLabel="Next" [responsive]="true"></pagination-controls>
+  <pagination-controls (pageChange)="loadPageableUsers(currentPage = $event)" previousLabel="Back" nextLabel="Next"
+                       [responsive]="true"></pagination-controls>
 </div>

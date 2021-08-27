@@ -11,8 +11,13 @@
 }
 
 .centerformLogin {
-  margin-left: 21%;
+  margin-left: 17%;
+  margin-right: 17%;
   padding: 10px;
   /*border: 2px solid green;*/
-  max-width: 60%;
+  max-width: 100%;
+}
+
+.forgotCSS{
+  padding-top: 2%;
 }

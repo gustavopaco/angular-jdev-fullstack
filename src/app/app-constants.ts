@@ -21,4 +21,8 @@ export class AppConstants {
   public static baseProfissao() : string {
    return `${this.getSERVERURL()}/profissao`;
   }
+
+  public static baseUserRecovery() : string {
+    return `${this.getSERVERURL()}/recovery`;
+  }
 }

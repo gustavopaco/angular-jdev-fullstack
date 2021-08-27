@@ -6,11 +6,11 @@ import {Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'angular-sb-microservicos';
-  private routes : Router;
+  private routes: Router;
 
-  constructor(routes : Router) {
+  constructor(routes: Router) {
     this.routes = routes;
   }
 

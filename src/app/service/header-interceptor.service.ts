@@ -23,24 +23,24 @@ export class HeaderInterceptorService implements HttpInterceptor {
       headers : request.headers.set("Authorization", token)
         // .set("Access-Control-Allow-Origin","*").set("Access-Control-Allow-Headers","*").set("Access-Control-Allow-Methods", "*") /* Habilitar em caso de necessidade*/
       });
-      return next.handle(cloned).pipe(tap((event : HttpEvent<any>) => {
+      return next.handle(cloned)/*.pipe(tap((event : HttpEvent<any>) => {
         if (event instanceof HttpResponse && (event.status === 200 || event.status === 204)) {
           console.log("Sucesso na operacao");
         }
-      }), catchError(this.errorHandling));
+      }), catchError(this.errorHandling));*/
     } else {
-      return next.handle(request).pipe(catchError(this.errorHandling));
+      return next.handle(request)/*.pipe(catchError(this.errorHandling))*/;
     }
   }
-
-  public errorHandling(error : HttpErrorResponse) {
-    let errorMessage: string;
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Mensagem: ${error.error.message} \nStatus: ${error.error.status}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
-  }
+  /*  IMPORTANT: Caso queria que o interceptador lide com erros automaticamente, descomentar tudo abaixo e acima */
+  // public errorHandling(error : HttpErrorResponse) {
+  //   let errorMessage: string;
+  //   if (error.error instanceof ErrorEvent) {
+  //     errorMessage = `Error: ${error.error.message}`;
+  //   } else {
+  //     errorMessage = `Mensagem: ${error.error.message} \nStatus: ${error.error.status}`;
+  //   }
+  //   window.alert(errorMessage);
+  //   return throwError(errorMessage);
+  // }
 }

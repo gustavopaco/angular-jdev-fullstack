@@ -1,5 +1,4 @@
-<p>Tela Usuario ADD</p>
-<h1>{{'31555555555' | mask:'(00)00000-0000'}}</h1>
+<!--<h1>{{'31555555555' | mask:'(00)00000-0000'}}</h1>-->
 <div class="addUsuarioContent">
   <div class="shadow-lg p-3 mb-5 bg-light rounded" style="min-height: 450px;">
     <form action="" class="center-formV" #formValidate="ngForm">
@@ -33,29 +32,32 @@
         </div>
         <div class="form-group col-md-3 mt-sm-auto offset-2">
           <label for="dataNascimento" class="form-label">Birthday</label>
-<!--                    <span class="appendValidateRequired" *ngIf="dataNascimento.invalid"> *</span>-->
+          <!--                    <span class="appendValidateRequired" *ngIf="dataNascimento.invalid"> *</span>-->
           <div class="input-group">
             <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" required="required"
                    placeholder="dd/mm/yyyy" [(ngModel)]="usuario.dataNascimento" ngbDatepicker
                    #dataNascimento="ngbDatepicker">
-              <button class="btn btn-primary" type="button"
-                      (click)=" dataNascimento.minDate = {year: 1950, month: 1, day: 1}; dataNascimento.toggle();">
-              </button>
+            <button class="btn btn-primary" type="button"
+                    (click)=" dataNascimento.minDate = {year: 1950, month: 1, day: 1}; dataNascimento.toggle();">
+            </button>
           </div>
         </div>
       </div>
       <div class="row mb-3">
         <div class="form-group col-md-4 offset-2 mt-sm-auto">
-          <label for="profissao" class="form-label">Prefession</label>
+          <label for="profissao" class="form-label">Profession</label>
           <span class="appendValidateRequired" *ngIf="profissaoValidate.invalid">*</span>
-          <select class="form-control form-select" name="profissao" id="profissao" [(ngModel)]="usuario.profissao.id" #profissaoValidate="ngModel" required="required">
+          <select class="form-control form-select" name="profissao" id="profissao" [(ngModel)]="usuario.profissao.id"
+                  #profissaoValidate="ngModel" required="required">
             <option *ngFor="let prof of profissoes" [ngValue]="prof.id">{{prof.nome}}</option>
           </select>
         </div>
         <div class="form-group col-md-4 offset-1 mt-sm-auto">
           <label for="salario" class="form-label">Salary</label>
           <span class="appendValidateRequired" *ngIf="salario.invalid">*</span>
-          <input type="text" class="form-control" name="salario" id="salario" [(ngModel)]="usuario.salario" #salario="ngModel" [maxLength]="10" currencyMask [options]="{prefix : 'U$', thousands : '.', decimal : ','}" required="required">
+          <input type="text" class="form-control" name="salario" id="salario" [(ngModel)]="usuario.salario"
+                 #salario="ngModel" [maxLength]="10" currencyMask
+                 [options]="{prefix : 'U$', thousands : '.', decimal : ','}" required="required">
         </div>
       </div>
       <div class="row mb-3">
@@ -103,29 +105,29 @@
       </div>
       <span class="border-bottom"></span>
     </div>
-    <table class="table table-hover tableCustomTelefone table-striped">
-      <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Number</th>
-        <th scope="col">
-          <div class="col-md-3 offset-lg-5 mt-sm-2">
-            <input class="form-control" type="text" placeholder="Search">
-          </div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let fone of usuario.telefones; let i = index">
-        <td>{{fone.id}}</td>
-        <td><span>{{fone.numero}}</span></td>
-        <td>
-          <button class="btn btn-danger" (click)="deletarTelefone(fone.id, i)">Delete</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
   </div>
+  <table class="table table-hover tableCustomTelefone table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Number</th>
+      <th scope="col">
+        <div class="col-md-3 offset-lg-5 mt-sm-2">
+          <input class="form-control" type="text" placeholder="Search">
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let fone of usuario.telefones; let i = index">
+      <td>{{fone.id}}</td>
+      <td><span>{{fone.numero}}</span></td>
+      <td>
+        <button class="btn btn-danger" (click)="deletarTelefone(fone.id, i)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- Modal -->

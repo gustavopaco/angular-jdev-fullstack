@@ -15,6 +15,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {IConfig, NgxMaskModule} from "ngx-mask";
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgxCurrencyModule} from "ngx-currency";
+import { UsuarioRecoveryComponent } from './components/usuario-recovery/usuario-recovery.component';
+import { UsuarioResetpasswordComponent } from './components/usuario-resetpassword/usuario-resetpassword.component';
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -24,7 +26,11 @@ export const appRouters : Routes = [
   {path : "home", component : HomeComponent, canActivate : [SecurityGuard]},
   {path : "showusers", component : UsuarioComponent, canActivate : [SecurityGuard]},
   {path : "addUser", component : UsuarioAddComponent},
-  {path : "addUser/:id", component : UsuarioAddComponent, canActivate : [SecurityGuard]}
+  {path : "addUser/:id", component : UsuarioAddComponent, canActivate : [SecurityGuard]},
+  {path : "forgotPassword", component : UsuarioRecoveryComponent},
+  {path : "resetPassword/:tk", component : UsuarioResetpasswordComponent},
+  {path : "404", component : LoginComponent},
+  {path : "**", component : LoginComponent}
 ]
 
   /* IMPORTANT: Exportando para dentro do app.Module o Array de Rotas URI do sistema */
@@ -37,7 +43,9 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
     HomeComponent,
     LoginComponent,
     UsuarioComponent,
-    UsuarioAddComponent
+    UsuarioAddComponent,
+    UsuarioRecoveryComponent,
+    UsuarioResetpasswordComponent
   ],
   imports: [
     NgxCurrencyModule,
