@@ -55,4 +55,9 @@ export class UsuarioService {
   public userAuthenticated() {
     return localStorage.getItem("token") !== null;
   }
+
+  public dataChart() : Observable<any> {
+    const url = `${AppConstants.baseUsuario()}/chart`;
+    return this.http.get(url);
+  }
 }
