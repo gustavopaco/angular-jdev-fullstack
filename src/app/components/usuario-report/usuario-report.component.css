@@ -1,0 +1,48 @@
+.addUsuarioContent {
+  /*border: 1px solid green;*/
+  position: relative;
+  max-width: 50%;
+  margin-top: 10%;
+  left: 25%;
+  right: 25%;
+  padding: 0;
+  /*transform: translateX(+798px);*/
+}
+
+.paddingLogin {
+  padding-left: 17%;
+}
+
+.center-formV {
+  padding-top: 5%;
+}
+
+.appendValidateRequired {
+  color: red;
+  font-size: 23px;
+}
+
+.telefoneAddDiv {
+  padding: 0;
+}
+
+.tituloCardTelefone {
+  font-size: 20px;
+  text-decoration-style: solid;
+}
+
+.tableCustomTelefone {
+  --bs-table-bg: #f8f9fa;
+  --bs-table-striped-bg: #ecedee;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #dfe0e1;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: #a3de12;
+  --bs-table-hover-color: #000;
+  color: #000;
+  border-color: #dfe0e1;
+}
+
+.userTableDiv {
+
+}

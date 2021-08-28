@@ -1,0 +1,72 @@
+<!--<h1>{{'31555555555' | mask:'(00)00000-0000'}}</h1>-->
+<div class="addUsuarioContent">
+  <div class="card" style="border: 1px solid red">
+    <div class="card-header text-center">
+      <span>Report</span>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-3 my-1 mt-sm-auto">
+          <label for="selectReport" class="form-label">Choice a Report</label>
+          <select class="form-control form-select" name="selectReport" id="selectReport" [(ngModel)]="selected" #selectedValidate="ngModel" required="required">
+            <option *ngFor="let sel of selectReport" [ngValue]="sel.id">{{sel.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="form-group col-md-3 mt-sm-auto">
+          <label for="dataInicio" class="form-label">Init Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="dataInicio" name="dataInicio" required="required"
+                   placeholder="dd/mm/yyyy" [(ngModel)]="report.initDate" ngbDatepicker
+                   #dataInicio="ngbDatepicker">
+            <button class="btn btn-primary" type="button"
+                    (click)=" dataInicio.minDate = {year: 1950, month: 1, day: 1}; dataInicio.toggle();">
+            </button>
+          </div>
+        </div>
+        <div class="form-group col-md-3 mt-sm-auto">
+          <label for="dataFim" class="form-label">End Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="dataFim" name="dataFim" required="required"
+                   placeholder="dd/mm/yyyy" [(ngModel)]="report.endDate" ngbDatepicker
+                   #dataFim="ngbDatepicker">
+            <button class="btn btn-primary" type="button"
+                    (click)=" dataFim.minDate = {year: 1950, month: 1, day: 1}; dataFim.toggle();">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="form-group col-md-2 mt-sm-auto">
+          <button type="button" class="btn btn-primary btn-lg" (click)="printReport()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Find
+          </button>
+        </div>
+        <div class="form-group col-md-2 mt-sm-auto">
+          <button type="button" class="btn btn-primary btn-lg">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe id="iframepdf" [src]="iframeURL" width="100%" height="500px" [frameBorder]="0" *ngIf="displayIframe" allowtransparency="true"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

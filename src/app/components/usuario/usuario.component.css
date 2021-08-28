@@ -35,6 +35,22 @@ td {
 }
 
 .tituloCardTelefone {
+  padding: 0;
   font-size: 20px;
   text-decoration-style: solid;
+}
+
+.btnSelectReport {
+  margin-top: 1.9%;
+  height: 10%;
+  width: fit-content;
+}
+
+.headerTable {
+  /*margin-left: 18%;*/
+  font-size: 40px;
+  text-decoration-style: solid;
+  margin-top: 0.5%;
+  width: 42%;
+  height: fit-content;
 }

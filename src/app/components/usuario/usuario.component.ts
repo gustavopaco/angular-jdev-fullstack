@@ -2,26 +2,37 @@ import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from "../../service/usuario.service";
 import {Usuario} from "../../model/usuario";
 import {Router} from "@angular/router";
+import {RelatorioService} from "../../service/relatorio.service";
+import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  styleUrls: ['./usuario.component.css'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class UsuarioComponent implements OnInit {
 
   usuarioService: UsuarioService;
   usuarios: Usuario[];
   nomeUsuario: String;
-  private routes : Router;
+  private routes: Router;
   numberOfElements = 0
   currentPage = 0;
   totalElements = 0;
   totalPages = 0;
+  selectReport: any[] = [{id: '.pdf', name: 'PDF'}, {id: '.xls', name: 'EXCEL'}]
+  selected: String
+  iframeURL : SafeResourceUrl
+  displayIframe= false
 
-  constructor(usuarioService: UsuarioService, routes : Router) {
+
+  constructor(usuarioService: UsuarioService, routes: Router, private relatorioService: RelatorioService, private modalService: NgbModal, config: NgbModalConfig, private sanitizer : DomSanitizer) {
     this.usuarioService = usuarioService;
     this.routes = routes;
+    config.backdrop = "static";
+    config.keyboard = false;
   }
 
   ngOnInit(): void {
@@ -52,7 +63,7 @@ export class UsuarioComponent implements OnInit {
   public findUserByName($event: KeyboardEvent) {
     if (this.nomeUsuario.length >= 1 || this.nomeUsuario.length === 0) {
       this.currentPage = (this.currentPage > 0) ? 0 : this.currentPage; /* Verifica se a pagina atual ao fazer pesquisa eh maior que 0, se for seta a pesquisa pra voltar para pagina 0 */
-      this.usuarioService.findUserByName(this.currentPage ,this.nomeUsuario).subscribe(response => {
+      this.usuarioService.findUserByName(this.currentPage, this.nomeUsuario).subscribe(response => {
         this.usuarios = response.content;
         this.numberOfElements = response.numberOfElements;
         this.totalElements = response.totalElements;
@@ -61,13 +72,23 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  loadPageableUsers(currentPage: number) {
+  public loadPageableUsers(currentPage: number) {
     currentPage = (currentPage === 0) ? 1 : currentPage;  /* Verifica se a pagina atual eh 0 para nao deixar retornar para pagina -1 */
-    this.usuarioService.loadPageableUsers(currentPage -1).subscribe(response => {
+    this.usuarioService.loadPageableUsers(currentPage - 1).subscribe(response => {
       this.usuarios = response.content;
       this.numberOfElements = response.numberOfElements;
       this.totalElements = response.totalElements;
       this.totalPages = response.totalPages
+    })
+  }
+
+  open() {
+    this.relatorioService.downloadReport(this.selected).subscribe(response => {
+
+      this.iframeURL = this.sanitizer.bypassSecurityTrustResourceUrl(response)
+      this.displayIframe = true;
+    }, error => {
+      alert(JSON.parse(error.error).message);
     })
   }
 }

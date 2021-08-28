@@ -17,6 +17,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {NgxCurrencyModule} from "ngx-currency";
 import { UsuarioRecoveryComponent } from './components/usuario-recovery/usuario-recovery.component';
 import { UsuarioResetpasswordComponent } from './components/usuario-resetpassword/usuario-resetpassword.component';
+import { UsuarioReportComponent } from './components/usuario-report/usuario-report.component';
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -27,6 +28,7 @@ export const appRouters : Routes = [
   {path : "showusers", component : UsuarioComponent, canActivate : [SecurityGuard]},
   {path : "addUser", component : UsuarioAddComponent},
   {path : "addUser/:id", component : UsuarioAddComponent, canActivate : [SecurityGuard]},
+  {path : "userReport", component : UsuarioReportComponent},
   {path : "forgotPassword", component : UsuarioRecoveryComponent},
   {path : "resetPassword/:tk", component : UsuarioResetpasswordComponent},
   {path : "404", component : LoginComponent},
@@ -45,7 +47,8 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
     UsuarioComponent,
     UsuarioAddComponent,
     UsuarioRecoveryComponent,
-    UsuarioResetpasswordComponent
+    UsuarioResetpasswordComponent,
+    UsuarioReportComponent
   ],
   imports: [
     NgxCurrencyModule,
