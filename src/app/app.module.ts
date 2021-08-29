@@ -20,6 +20,7 @@ import { UsuarioResetpasswordComponent } from './components/usuario-resetpasswor
 import { UsuarioReportComponent } from './components/usuario-report/usuario-report.component';
 import {BarChartComponent} from "./components/bar-chart/bar-chart.component";
 import {ChartsModule} from "ng2-charts";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 
 /*IMPORTANT: Devinindo paths para redirecionamento de pagina, baseada em componentes */
@@ -55,6 +56,7 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
     BarChartComponent
   ],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
     ChartsModule,
     NgxCurrencyModule,
     NgxPaginationModule,  /* Modulo de Paginacao */

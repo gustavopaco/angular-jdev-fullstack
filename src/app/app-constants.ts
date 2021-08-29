@@ -25,4 +25,8 @@ export class AppConstants {
   public static baseUserRecovery() : string {
     return `${this.getSERVERURL()}/recovery`;
   }
+
+  public static baseRoles() : string {
+    return `${this.getSERVERURL()}/role`;
+  }
 }
