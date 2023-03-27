@@ -1,0 +1,32 @@
+<section class="authenticate">
+  <div class="container position-absolute top-50 start-50 translate-middle overflow-hidden">
+    <h2 class="white-text">Login</h2>
+    <form action="#" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-12 mb-3 form-floating">
+          <input type="text" class="form-control" id="email" [formControlName]="'username'"
+                 [ngClass]="validatorInputNgClass('username')" placeholder="Informe o e-mail">
+          <label for="email" class="ps-4">E-mail</label>
+          <small class="invalid-feedback">{{ validatorSmallGenericMessage('username', 'Username') }}</small>
+        </div>
+      </div><!--row-->
+      <div class="row">
+        <div class="col-12 mb-3 form-floating">
+          <input type="password" class="form-control" id="password" [formControlName]="'password'"
+                 [ngClass]="validatorInputNgClass('password')" placeholder="Informe a senha">
+          <label for="password" class="ps-4">Senha</label>
+          <small class="invalid-feedback">{{ validatorSmallGenericMessage('username', 'Username') }}</small>
+        </div>
+      </div><!--row-->
+      <div class="row justify-content-between align-items-end">
+        <div class="col-sm-3 mb-3">
+          <button class="btn btn-outline-warning btn-lg w-100">Login</button>
+        </div><!--col-->
+        <div class="col-sm-6 mb-3 d-flex flex-column align-items-center flex-sm-row justify-content-sm-between align-items-sm-start">
+          <a class="white-text link-warning text-decoration-none mb-3" [routerLink]="['/auth/register']">Registrar</a>
+          <a href="#" class="white-text link-warning text-decoration-none">Esqueci a senha.</a>
+        </div><!--col-->
+      </div><!--row-->
+    </form>
+  </div>
+</section>

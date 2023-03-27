@@ -1,0 +1,60 @@
+@import "color-variables";
+@import "color-classes";
+
+/*Reset Documento*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,body {
+  height: 100%;
+}
+
+.cursor-pointer {
+  cursor:pointer
+}
+
+.invalid-text {
+  color: #dc3545;
+}
+
+/*Note: Evento de FadeIn ao mudar de rota*/
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+router-outlet + * {
+  display: block;  /* Change display inline to block */
+  animation: fade 1s;
+}
+
+
+/*Note: Fix NgxBootstrap Tooltip*/
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip-arrow {
+  position: absolute;
+}

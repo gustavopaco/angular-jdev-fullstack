@@ -1,0 +1,42 @@
+<section class="home">
+  <div class="container">
+    <article *ngIf="isAdmin">
+      <div class="card">
+        <h2 class="card-header">Lista de Usuários</h2>
+        <div class="card-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Permissão</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <th scope="row">{{ usuario.id }}</th>
+              <td>{{ usuario.nome }}</td>
+              <td>
+                <div *ngFor="let p of usuario.authorities"><p>{{ p.authority }}</p></div>
+              </td>
+              <td>
+                <div class="text-end">
+                  <a class="btn btn-outline-warning me-2 mb-3 mb-md-0" [routerLink]="['edit/', usuario.id]">Editar</a>
+                  <a class="btn btn-outline-danger me-2 mb-3 mb-md-0">Deletar</a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+    <article *ngIf="isFisica">
+      <h2>Bem vindo Pessoa Física</h2>
+    </article>
+    <article *ngIf="isJuridica">
+      <h2>Bem vindo Pessoa Jurídica</h2>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+:host {
+  height: 100%;
+}
+
+section.layout-with-nav, section.layout-without-nav {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+section.layout-with-nav main {
+  padding-top: 56px;
+}
+
+/*# sourceMappingURL=layout-config.css.map */

@@ -1,0 +1,202 @@
+<section class="register-form">
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center" [ngClass]="fixNgClassRegisterEditForm()">
+      <div class="formPosicao">
+        <a class="white-text cursor-pointer" (click)="locationHref.back()">Voltar</a>
+        <h2 class="fw-lighter mb-3 white-text">{{ titulo }}</h2>
+        <form action="#" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+          <div class="row" *ngIf="isEditPage">
+            <div class="col-12 mb-3 form-floating">
+              <input type="text" class="form-control" id="id" [formControlName]="'id'"
+                     placeholder="Informe seu nome">
+              <label for="id" class="ps-4">Id</label>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row">
+            <div class="col-12 mb-3 form-floating">
+              <input type="text" class="form-control" id="nome" [formControlName]="'nome'"
+                     [ngClass]="validatorInputNgClass('nome')" placeholder="Informe seu nome">
+              <label for="nome" class="ps-4">Nome</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('nome', 'Nome') }}</small>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row" *ngElse="isEditPage">
+            <div class="col-12 mb-3 form-floating">
+              <input type="text" class="form-control" id="email" [formControlName]="'username'"
+                     [ngClass]="validatorInputNgClass('username')" placeholder="Informe o e-mail">
+              <label for="email" class="ps-4">E-mail</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('username', 'Email') }}</small>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row" *ngElse="isEditPage">
+            <div class="col-12 mb-3 form-floating">
+              <input type="password" class="form-control" id="password" [formControlName]="'password'"
+                     [ngClass]="validatorInputNgClass('password')" placeholder="Informe a senha">
+              <label for="password" class="ps-4">Senha</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('password', 'Senha') }}</small>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row">
+            <div class="col-sm-6 mb-3" *ngElse="isEditPage">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="cpf" [formControlName]="'cpf'"
+                       [ngClass]="validatorInputNgClass('cpf')" placeholder="Informe seu CPF">
+                <label for="cpf" class="">CPF</label>
+                <small class="invalid-feedback">{{ validatorSmallGenericMessage('cpf', 'CPF') }}</small>
+              </div>
+            </div><!--col-->
+            <div class="col-sm-6 mb-3 " formArrayName="telefones" *ngFor="let telefone of telefones.controls">
+              <div class="form-floating" [formGroupName]="0">
+                <input type="text" class="form-control" id="telefone" [formControlName]="'numero'"
+                       [ngClass]="validatorInputNgClassFormArray('numero',telefone)" placeholder="Informe seu telefone">
+                <label for="telefone" class="">Telefone</label>
+                <small
+                  class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('numero', 'Telefone', telefone) }}</small>
+              </div>
+            </div><!--col-->
+          </div><!--row-->
+          <div formArrayName="enderecos" *ngFor="let endereco of enderecos.controls;">
+            <div [formGroupName]="0">
+              <div class="row">
+                <div class="col-sm-6 mb-3 form-floating">
+                  <input type="text" class="form-control" id="cep" [formControlName]="'cep'"
+                         [ngClass]="validatorInputNgClassFormArray('cep',endereco)" (blur)="buscarCep(endereco)"
+                         placeholder="Informe seu cep">
+                  <label for="cep" class="ps-4">Cep</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('cep', 'Cep', endereco) }}</small>
+                </div><!--col-->
+                <div class="col-sm-6 mb-3 form-floating">
+                  <input type="text" class="form-control" id="numero" [formControlName]="'numero'"
+                         [ngClass]="validatorInputNgClassFormArray('numero',endereco)"
+                         placeholder="Informe o numero da residência">
+                  <label for="numero" class="ps-4">Numero</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('numero', 'Número', endereco) }}</small>
+                </div><!--col-->
+              </div><!--row-->
+              <div class="row">
+                <div class="col-12 mb-3 form-floating">
+                  <input type="text" class="form-control" id="rua" [formControlName]="'rua'"
+                         [ngClass]="validatorInputNgClassFormArray('rua',endereco)"
+                         placeholder="Informe sua Rua">
+                  <label for="rua" class="ps-4">Rua</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('rua', 'Rua', endereco) }}</small>
+                </div><!--col-->
+              </div><!--row-->
+              <div class="row">
+                <div class="col-12 mb-3 form-floating">
+                  <input type="text" class="form-control" id="complemento" [formControlName]="'complemento'"
+                         placeholder="Complemento...">
+                  <label for="complemento" class="ps-4">Complemento</label>
+                </div><!--col-->
+              </div><!--row-->
+              <div class="row">
+                <div class="col-sm-12 mb-3 form-floating">
+                  <input type="text" class="form-control" id="bairro" [formControlName]="'bairro'"
+                         [ngClass]="validatorInputNgClassFormArray('bairro',endereco)"
+                         placeholder="Informe seu bairro">
+                  <label for="bairro" class="ps-4">Bairro</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('bairro', 'Bairro', endereco) }}</small>
+                </div><!--col-->
+              </div><!--row-->
+              <div class="row">
+                <div class="col-sm-6 mb-3 form-floating">
+                  <input type="text" class="form-control" id="cidade" [formControlName]="'cidade'"
+                         [ngClass]="validatorInputNgClassFormArray('cidade',endereco)" placeholder="Informe sua cidade">
+                  <label for="cidade" class="ps-4">Cidade</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('cidade', 'Cidade', endereco) }}</small>
+                </div><!--col-->
+                <div class="col-sm-6 mb-3 form-floating">
+                  <input type="text" class="form-control" id="estado" [formControlName]="'estado'"
+                         [ngClass]="validatorInputNgClassFormArray('estado',endereco)" placeholder="Informe o estado">
+                  <label for="estado" class="ps-4">Estado</label>
+                  <small
+                    class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('estado', 'Estado', endereco) }}</small>
+                </div><!--col-->
+              </div><!--row-->
+            </div><!--FormGroupName-->
+          </div><!--FormArrayName-->
+          <div class="row justify-content-between">
+            <div class="col-12 d-flex flex-wrap justify-content-between">
+              <button class="btn btn-outline-success btn-lg mb-3">{{ btnSubmitValue }}</button>
+              <button type="button" class="btn btn-lg btn-outline-warning mb-3" (click)="onResetForm()"
+                      *ngElse="isEditPage">Limpar
+              </button>
+            </div><!--col-->
+          </div><!--row-->
+        </form>
+      </div>
+    </div><!--corrigirPosicao-->
+    <div class="arrow-down-icon-wrapper text-center">
+      <div class="arrow-down-icon d-inline-block"></div>
+    </div>
+  </div><!--container-->
+</section>
+
+<section class="py-4" *ngIf="isEditPage">
+  <div class="container">
+    <div class="card">
+      <div class="card-header d-flex flex-wrap justify-content-between">
+        <h2 class="fw-lighter">Telefone</h2>
+        <button class="btn btn-outline-success d-inline-block" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">Cadastrar
+        </button>
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Número</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let telefone of usuario?.telefones">
+            <th scope="row">{{ telefone.id }}</th>
+            <td>{{ telefone.numero }}</td>
+            <td class="text-end">
+              <button class="btn btn-outline-danger d-inline-block">Deletar</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Novo Telefone</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="#" [formGroup]="formularioAddTelefone">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 form-floating">
+                  <input type="text" class="form-control" id="numeroTel" [formControlName]="'numero'"
+                         [ngClass]="validatorTelefone('numero')" placeholder="Informe o Telefone">
+                  <label for="numeroTel" class="ps-4">Número</label>
+                </div><!--col-->
+              </div><!--row-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"
+                      [attr.data-bs-dismiss]="closeModalOnFormValid()" (click)="saveTelefone()">Salvar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div><!--container-->
+</section>
+<!--<app-formulario-debug [formularioReativoDebug]="formulario"></app-formulario-debug>-->
