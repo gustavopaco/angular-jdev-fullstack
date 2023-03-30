@@ -20,9 +20,10 @@ export class AuthService {
     return localStorage.getItem("fullToken") != undefined;
   }
 
-  savePermissions(authorities: string, jwt: string): void {
+  savePermissions(id: number, authorities: string, jwt: string): void {
     localStorage.setItem("fullToken", jwt);
-    localStorage.setItem("authorities", authorities)
+    localStorage.setItem("authorities", authorities);
+    localStorage.setItem("idUser", String(id));
   }
 
   getPermissions(permission: string): boolean {
@@ -45,6 +46,10 @@ export class AuthService {
 
   getFullToken(): string {
     return <string>localStorage.getItem("fullToken");
+  }
+
+  getUserId(): string {
+    return <string>localStorage.getItem("idUser");
   }
 
   invalidateSession(): void {

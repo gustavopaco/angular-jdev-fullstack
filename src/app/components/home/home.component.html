@@ -23,7 +23,7 @@
               <td>
                 <div class="text-end">
                   <a class="btn btn-outline-warning me-2 mb-3 mb-md-0" [routerLink]="['edit/', usuario.id]">Editar</a>
-                  <a class="btn btn-outline-danger me-2 mb-3 mb-md-0">Deletar</a>
+                  <a class="btn btn-outline-danger me-2 mb-3 mb-md-0" (click)="deleteUsuario(usuario.id)">Deletar</a>
                 </div>
               </td>
             </tr>

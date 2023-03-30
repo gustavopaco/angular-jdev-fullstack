@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TokenInterceptor} from "./shared/service/token.interceptor";
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {TokenInterceptor} from "./shared/service/token.interceptor";
     ContainerModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
   providers: [

@@ -34,4 +34,8 @@ section.register-form .corrigirPosicaoEditar {
   background-size: 100% 100%;
 }
 
+.select-text-label {
+  color: rgb(33, 37, 41);
+}
+
 /*# sourceMappingURL=register.css.map */

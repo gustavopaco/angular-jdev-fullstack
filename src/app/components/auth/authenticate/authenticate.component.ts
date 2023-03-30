@@ -40,7 +40,7 @@ export class AuthenticateComponent implements OnInit {
       this.authService.authenticate(this.formulario.value).subscribe({
         next: (response: any) => {
           this.toastMessage.successMessage("Usuário logado com sucesso.")
-          this.authService.savePermissions(JSON.stringify(response.authorities), response.jwt);
+          this.authService.savePermissions(response.id, JSON.stringify(response.authorities), response.jwt);
           this.router.navigate(['/home'])
         },
         error: err => {

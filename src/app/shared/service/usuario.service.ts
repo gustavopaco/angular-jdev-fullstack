@@ -29,6 +29,10 @@ export class UsuarioService {
     return this.requestApi.put(API_USUARIO, usuario);
   }
 
+  deleteUsuario(id: number) {
+    return this.requestApi.delete(`${API_USUARIO}/${id}`).pipe(take(1))
+  }
+
   getUsuarioEmitter() {
     return this.usuarioEvent;
   }

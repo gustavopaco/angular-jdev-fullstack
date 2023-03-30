@@ -4,6 +4,7 @@ import {Usuario} from "../../shared/model/Usuario";
 import {ToastMessageService} from "../../shared/external/ngx-toastr/toast-message.service";
 import {HttpValidator} from "../../shared/validator/http-validator";
 import {AuthService} from "../../shared/service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit{
   isFisica: boolean = false;
   isJuridica: boolean = false;
 
-  constructor(private usuarioService: UsuarioService, private toastMessage: ToastMessageService, private authService: AuthService) {
+  constructor(private usuarioService: UsuarioService, private toastMessage: ToastMessageService, private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,5 +44,27 @@ export class HomeComponent implements OnInit{
         }
       });
     }
+  }
+
+  deleteUsuario(id: number | undefined) {
+    if (confirm("Tem certeza que deseja deletar esse Usuário?") ) {
+      if (id)
+        this.deleteUsuarioApi(id);
+    }
+  }
+
+  private deleteUsuarioApi(id: number) {
+    this.usuarioService.deleteUsuario(id).subscribe({
+      next: () => {
+        this.toastMessage.successMessage("Usuário deletado com sucesso.");
+        if (Number(this.authService.getUserId()) == id) {
+          this.authService.invalidateSession();
+          this.router.navigate(['/auth'])
+        }
+        this.usuarios = this.usuarios.filter(u => u.id != id);
+
+      },
+      error: err => {HttpValidator.validateResponseErrorMessage(err);}
+    })
   }
 }

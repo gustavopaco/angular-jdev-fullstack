@@ -14,4 +14,8 @@ export class TelefoneService {
   addTelefone(telefone: Telefone): Observable<Telefone> {
     return this.requestApi.post(API_TELEFONE, telefone)
   }
+
+  deleteTelefone(id: number): Observable<any> {
+    return this.requestApi.delete(`${API_TELEFONE}/${id}`)
+  }
 }

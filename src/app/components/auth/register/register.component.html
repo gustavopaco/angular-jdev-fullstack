@@ -8,7 +8,7 @@
           <div class="row" *ngIf="isEditPage">
             <div class="col-12 mb-3 form-floating">
               <input type="text" class="form-control" id="id" [formControlName]="'id'"
-                     placeholder="Informe seu nome">
+                     readonly placeholder="Informe seu nome">
               <label for="id" class="ps-4">Id</label>
             </div><!--col-->
           </div><!--row-->
@@ -28,14 +28,6 @@
               <small class="invalid-feedback">{{ validatorSmallGenericMessage('username', 'Email') }}</small>
             </div><!--col-->
           </div><!--row-->
-          <div class="row" *ngElse="isEditPage">
-            <div class="col-12 mb-3 form-floating">
-              <input type="password" class="form-control" id="password" [formControlName]="'password'"
-                     [ngClass]="validatorInputNgClass('password')" placeholder="Informe a senha">
-              <label for="password" class="ps-4">Senha</label>
-              <small class="invalid-feedback">{{ validatorSmallGenericMessage('password', 'Senha') }}</small>
-            </div><!--col-->
-          </div><!--row-->
           <div class="row">
             <div class="col-sm-6 mb-3" *ngElse="isEditPage">
               <div class="form-floating">
@@ -45,11 +37,50 @@
                 <small class="invalid-feedback">{{ validatorSmallGenericMessage('cpf', 'CPF') }}</small>
               </div>
             </div><!--col-->
-            <div class="col-sm-6 mb-3 " formArrayName="telefones" *ngFor="let telefone of telefones.controls">
-              <div class="form-floating" [formGroupName]="0">
-                <input type="text" class="form-control" id="telefone" [formControlName]="'numero'"
+            <div class="col-sm-6 mb-3 form-floating">
+              <input type="text" class="form-control" id="dataNascimento" [formControlName]="'dataNascimento'"
+                     [ngClass]="validatorInputNgClass('dataNascimento')" bsDatepicker
+                     [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue', showWeekNumbers: false}"
+                     [maxDate]="maxDate"
+                     placeholder="Daterangepicker">
+              <label for="dataNascimento" class="ps-4">Data de nascimento</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('dataNascimento', 'Data de Nascimento') }}</small>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row" *ngElse="isEditPage">
+            <div class="col-12 mb-3 form-floating">
+              <input type="password" class="form-control" id="password" [formControlName]="'password'"
+                     [ngClass]="validatorInputNgClass('password')" placeholder="Informe a senha">
+              <label for="password" class="ps-4">Senha</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('password', 'Senha') }}</small>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row">
+            <div class="col-12 mb-3 form-floating">
+              <select id="profissao" class="form-select" [formControlName]="'profissao'" [compareWith]="compareObjects"
+                      [ngClass]="validatorInputNgClass('profissao')">
+                <option disabled selected value="null">Selecione...</option>
+                <option *ngFor="let profissao of profissoes" [ngValue]="profissao">{{ profissao.nome }}</option>
+              </select>
+              <label for="profissao" class="ps-4 select-text-label">Profissão</label>
+              <small class="invalid-feedback">{{ validatorSmallGenericMessage('profissao', 'Profissão') }}</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-3">
+              <div class="form-floating">
+                <input type="number" class="form-control" id="salario" [formControlName]="'salario'"
+                       [ngClass]="validatorInputNgClass('salario')" placeholder="Informe seu CPF">
+                <label for="salario" class="">Salário</label>
+                <small class="invalid-feedback">{{ validatorSmallGenericMessage('salario', 'Salario') }}</small>
+              </div>
+            </div><!--col-->
+            <div class="col-sm-6 mb-3 " formArrayName="telefones"
+                 *ngFor="let telefone of telefones.controls; index as i" [style.display]="i == 0 ? 'block' : 'none'">
+              <div class="form-floating" [formGroupName]="i">
+                <input type="text" class="form-control" id="{{'telefone'+i}}" [formControlName]="'numero'"
                        [ngClass]="validatorInputNgClassFormArray('numero',telefone)" placeholder="Informe seu telefone">
-                <label for="telefone" class="">Telefone</label>
+                <label for="{{'telefone'+i}}" class="">Telefone</label>
                 <small
                   class="invalid-feedback">{{ validatorSmallGenericMessageFormArray('numero', 'Telefone', telefone) }}</small>
               </div>
@@ -156,11 +187,13 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let telefone of usuario?.telefones">
-            <th scope="row">{{ telefone.id }}</th>
-            <td>{{ telefone.numero }}</td>
+          <tr *ngFor="let telefone of usuario?.telefones; index as j">
+            <th scope="row">{{ telefone?.id }}</th>
+            <td>{{ telefone?.numero }}</td>
             <td class="text-end">
-              <button class="btn btn-outline-danger d-inline-block">Deletar</button>
+              <button type="button" class="btn btn-outline-danger d-inline-block"
+                      (click)="deleteTelefoneApi(telefone.id, j)">Deletar
+              </button>
             </td>
           </tr>
           </tbody>
@@ -189,7 +222,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary"
-                      [attr.data-bs-dismiss]="closeModalOnFormValid()" (click)="saveTelefone()">Salvar</button>
+                      [attr.data-bs-dismiss]="closeModalOnFormValid()" (click)="saveNewTelefone()">Salvar
+              </button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
           </form>
@@ -199,4 +233,4 @@
 
   </div><!--container-->
 </section>
-<!--<app-formulario-debug [formularioReativoDebug]="formulario"></app-formulario-debug>-->
+<app-formulario-debug [formularioReativoDebug]="formulario"></app-formulario-debug>
