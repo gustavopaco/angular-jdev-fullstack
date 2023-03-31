@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { UsuarioDetailsComponent } from './usuario/usuario-details/usuario-details.component';
 import {AuthModule} from "../auth/auth.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {AuthModule} from "../auth/auth.module";
     imports: [
         CommonModule,
         HomeRoutingModule,
-        AuthModule
+        AuthModule,
+        ReactiveFormsModule
     ]
 })
 export class HomeModule { }

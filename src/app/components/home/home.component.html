@@ -1,8 +1,13 @@
 <section class="home">
   <div class="container">
     <article *ngIf="isAdmin">
-      <div class="card">
-        <h2 class="card-header">Lista de Usuários</h2>
+      <div class="card mt-2">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+          <h2 >Lista de Usuários</h2>
+          <form action="#" [formGroup]="formularioPesquisa">
+            <input type="text" class="form-control" [formControlName]="'nome'" placeholder="Pesquisa por nome...">
+          </form>
+        </div>
         <div class="card-body table-responsive">
           <table class="table table-hover">
             <thead>

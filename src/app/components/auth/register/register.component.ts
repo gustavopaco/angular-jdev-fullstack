@@ -252,6 +252,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     telefone.usuario = this.usuario;
     this.inscricao.push(this.telefoneService.addTelefone(telefone).subscribe({
       next: response => {
+        this.formularioAddTelefone.reset();
         this.toastMessage.successMessage("Novo telefone cadastrado com sucesso.")
         this.addTelefoneObject(response)
         this.usuario?.telefones?.push(response)

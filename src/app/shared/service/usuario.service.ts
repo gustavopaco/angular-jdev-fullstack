@@ -17,6 +17,10 @@ export class UsuarioService {
     return this.requestApi.get<Usuario[]>(API_USUARIO).pipe(take(1))
   }
 
+  getAllUsuariosByName(nome: string): Observable<Usuario[]> {
+    return this.requestApi.get<Usuario[]>(`${API_USUARIO}/listByName/${nome}`).pipe(take(1))
+  }
+
   getUsuarioById(id: number): Observable<Usuario> {
     return this.requestApi.get<Usuario>(`${API_USUARIO}/${id}`)
   }
