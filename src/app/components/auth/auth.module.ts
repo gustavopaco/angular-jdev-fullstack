@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/components/shared.module";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import {NgxMaskDirective} from "ngx-mask";
 
 
 @NgModule({
@@ -17,13 +18,14 @@ import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
     exports: [
         RegisterComponent
     ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,
-    BsDatepickerModule
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        ReactiveFormsModule,
+        SharedModule,
+        BsDatepickerModule,
+        NgxMaskDirective
+    ]
 })
 export class AuthModule {
 }

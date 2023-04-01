@@ -9,6 +9,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TokenInterceptor} from "./shared/service/token.interceptor";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import {provideEnvironmentNgxMask} from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
     BrowserAnimationsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    provideEnvironmentNgxMask(),
   ],
   bootstrap: [AppComponent]
 })

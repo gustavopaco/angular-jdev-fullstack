@@ -1,5 +1,5 @@
 import {CanLoadFn, CanMatchFn} from "@angular/router";
-import {VERIFICAR_ACESSO} from "./auth.guard";
+import {VERIFICAR_ACESSO, VERIFICAR_ACESSO_AUTH} from "./auth.guard";
 
 export const CANLOAD: CanLoadFn = (route, segments) => {
   return VERIFICAR_ACESSO();
@@ -9,6 +9,10 @@ export const CANLOAD: CanLoadFn = (route, segments) => {
 export const CANMATCH: CanMatchFn = (route, segments) => {
 
   return VERIFICAR_ACESSO();
+}
+
+export const CANMATCH_AUTH = () => {
+  return VERIFICAR_ACESSO_AUTH
 }
 
 

@@ -32,6 +32,7 @@
             <div class="col-sm-6 mb-3" *ngElse="isEditPage">
               <div class="form-floating">
                 <input type="text" class="form-control" id="cpf" [formControlName]="'cpf'"
+                       [mask]="'000.000.000-00'" [dropSpecialCharacters]="false"
                        [ngClass]="validatorInputNgClass('cpf')" placeholder="Informe seu CPF">
                 <label for="cpf" class="">CPF</label>
                 <small class="invalid-feedback">{{ validatorSmallGenericMessage('cpf', 'CPF') }}</small>
@@ -69,7 +70,8 @@
           <div class="row">
             <div class="col-sm-6 mb-3">
               <div class="form-floating">
-                <input type="number" class="form-control" id="salario" [formControlName]="'salario'"
+                <input type="text" class="form-control" id="salario" [formControlName]="'salario'"
+                       prefix="R$ " [mask]="'separator.2'" [thousandSeparator]="'.'" [separatorLimit]="'1000000000'"
                        [ngClass]="validatorInputNgClass('salario')" placeholder="Informe seu CPF">
                 <label for="salario" class="">Salário</label>
                 <small class="invalid-feedback">{{ validatorSmallGenericMessage('salario', 'Salario') }}</small>
@@ -79,6 +81,7 @@
                  *ngFor="let telefone of telefones.controls; index as i" [style.display]="i == 0 ? 'block' : 'none'">
               <div class="form-floating" [formGroupName]="i">
                 <input type="text" class="form-control" id="{{'telefone'+i}}" [formControlName]="'numero'"
+                       [mask]="'(00) 00000-0000'" [dropSpecialCharacters]="true"
                        [ngClass]="validatorInputNgClassFormArray('numero',telefone)" placeholder="Informe seu telefone">
                 <label for="{{'telefone'+i}}" class="">Telefone</label>
                 <small
@@ -90,7 +93,7 @@
             <div [formGroupName]="0">
               <div class="row">
                 <div class="col-sm-6 mb-3 form-floating">
-                  <input type="text" class="form-control" id="cep" [formControlName]="'cep'"
+                  <input type="text" class="form-control" id="cep" [formControlName]="'cep'" [mask]="'00000-000'"
                          [ngClass]="validatorInputNgClassFormArray('cep',endereco)" (blur)="buscarCep(endereco)"
                          placeholder="Informe seu cep">
                   <label for="cep" class="ps-4">Cep</label>

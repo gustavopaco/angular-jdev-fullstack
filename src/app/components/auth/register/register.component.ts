@@ -199,7 +199,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           },
           error: err => {
             console.log(err)
-            HttpValidator.validateResponseErrorMessage(err)
+            this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
           }
         }))
       }
