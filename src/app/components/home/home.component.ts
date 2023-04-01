@@ -5,22 +5,30 @@ import {ToastMessageService} from "../../shared/external/ngx-toastr/toast-messag
 import {HttpValidator} from "../../shared/validator/http-validator";
 import {AuthService} from "../../shared/service/auth.service";
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Subscription} from "rxjs";
+import {FormBuilder, FormControl} from "@angular/forms";
+import {debounceTime, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy {
 
   usuarios: Usuario[] = [];
   isAdmin: boolean = false;
   isFisica: boolean = false;
   isJuridica: boolean = false;
-  formularioPesquisa!: FormGroup;
+
+  pesquisa: FormControl = new FormControl();
+
+
+  currentPage: number = 1;
+  totalElements: number = 0
+  totalPages: number = 0;
+  numberOfElements: number = 0;
+
+
   inscricao: Subscription[] = [];
 
   constructor(private usuarioService: UsuarioService,
@@ -31,16 +39,9 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.generateForm();
     this.loadPermissions()
     this.loadUsuarios();
     this.findUsuariosByNome();
-  }
-
-  private generateForm(): void {
-    this.formularioPesquisa = this.fb.group({
-      nome: [null]
-    })
   }
 
   private loadPermissions(): void {
@@ -53,7 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     if (this.authService.isAdmin()) {
       this.usuarioService.getAllUsuarios().subscribe({
         next: response => {
-          this.usuarios = response;
+          this.loadPageableUsuario(response);
+          this.backToFirstPage();
         },
         error: err => {
           this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err));
@@ -62,8 +64,47 @@ export class HomeComponent implements OnInit, OnDestroy{
     }
   }
 
-  deleteUsuario(id: number | undefined): void {
-    if (confirm("Tem certeza que deseja deletar esse Usuário?") ) {
+  private loadPageableUsuario(response: any): void {
+    this.usuarios = response.content;
+    this.totalElements = response.totalElements;
+    this.numberOfElements = response.numberOfElements;
+    this.totalPages = response.totalPages;
+  }
+
+  private backToFirstPage() {
+    this.currentPage = 1;
+  }
+
+  private findUsuariosByNome(): void {
+    this.inscricao.push(this.pesquisa.valueChanges.pipe(debounceTime(800)).subscribe(data => {
+      if (data.length > 2) {
+        this.inscricao.push(this.usuarioService.getUsuariosPage(0, this.pesquisa.value).subscribe({
+          next: response => {
+            this.loadPageableUsuario(response);
+            this.backToFirstPage();
+          },
+          error: err => {
+            HttpValidator.validateResponseErrorMessage(err)
+          }
+        }))
+      } else if (data.length == 0) {
+        this.loadUsuarios();
+      }
+    }))
+  }
+
+  onPageChange(page: number): void {
+    page = (page === 0) ? 1 : page
+    this.inscricao.push(this.usuarioService.getUsuariosPage(page - 1, this.pesquisa.value).subscribe({
+      next: response => {
+        this.loadPageableUsuario(response);
+      },
+      error: err => this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+    }))
+  }
+
+  deleteConfirmation(id: number | undefined): void {
+    if (confirm("Tem certeza que deseja deletar esse Usuário?")) {
       if (id)
         this.deleteUsuarioApi(id);
     }
@@ -73,29 +114,42 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.usuarioService.deleteUsuario(id).subscribe({
       next: () => {
         this.toastMessage.successMessage("Usuário deletado com sucesso.");
-        if (Number(this.authService.getUserId()) == id) {
-          this.authService.invalidateSession();
-          this.router.navigate(['/auth'])
+        if (this.onDeleteIsSelfDelete(id)) {
+          this.invalidateUsuario(id)
+        } else {
+          this.onDeleteRemoveUsuarioFromList(id)
         }
-        this.usuarios = this.usuarios.filter(u => u.id != id);
-
       },
-      error: err => {HttpValidator.validateResponseErrorMessage(err);}
+      error: err => {
+        HttpValidator.validateResponseErrorMessage(err);
+      }
     })
   }
 
-  private findUsuariosByNome(): void {
-    this.inscricao.push(this.formularioPesquisa.get("nome")!.valueChanges.subscribe(data => {
-      if (data.length > 2) {
-        this.usuarioService.getAllUsuariosByName(data).subscribe({
-          next: response => this.usuarios = response,
-          error: err => {HttpValidator.validateResponseErrorMessage(err)}
-        })
-      }
-      if (data.length == 0 ) {
-        this.loadUsuarios();
-      }
-    }))
+  private onDeleteRemoveUsuarioFromList(id: number): void {
+    this.usuarios = this.usuarios.filter(u => u.id != id);
+    --this.totalElements;
+    --this.numberOfElements;
+    this.onDeleteVerifyLastElementFromPage();
+  }
+
+  //Note: Metodo que verifica se ao Deletar item, o numero total de paginas eh maior que 1,
+  // e o numero de elementos na pagina atual eh 0 ou seja, acabou de deletar o ultimo item.
+  // Se sim, volta para pagina anterior e Recarrega daados na tela
+  private onDeleteVerifyLastElementFromPage(): void {
+    if (this.totalPages > 1 && this.numberOfElements === 0) {
+      --this.currentPage;
+      this.onPageChange(this.currentPage);
+    }
+  }
+
+  private onDeleteIsSelfDelete(id: number): boolean {
+    return (Number(this.authService.getUserId()) == id);
+  }
+
+  private invalidateUsuario(id: number): void {
+    this.authService.invalidateSession();
+    this.router.navigate(['/auth'])
   }
 
   ngOnDestroy(): void {

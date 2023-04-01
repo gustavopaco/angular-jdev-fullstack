@@ -13,8 +13,21 @@ export class UsuarioService {
 
   constructor(private requestApi: HttpClient) { }
 
-  getAllUsuarios(): Observable<Usuario[]> {
-    return this.requestApi.get<Usuario[]>(API_USUARIO).pipe(take(1))
+  getAllUsuarios(): Observable<any> {
+    return this.requestApi.get<any>(API_USUARIO).pipe(take(1))
+  }
+
+  getUsuariosPage(currentPage: number, nome?: string, sortedBy?: string[]): Observable<any> {
+    if (nome != undefined && nome != '') {
+      if (sortedBy != undefined) {
+        return this.requestApi.get<any>(`${API_USUARIO}/page`, {params: {page: currentPage, sort: sortedBy}})
+      }
+      return this.requestApi.get<any>(`${API_USUARIO}/page`, {params: {page: currentPage, nome: nome}})
+    }
+    if (sortedBy != undefined) {
+      return this.requestApi.get<any>(`${API_USUARIO}/page`, {params: {page: currentPage, sort: sortedBy}})
+    }
+    return this.requestApi.get<any>(`${API_USUARIO}/page`, {params: {page: currentPage}})
   }
 
   getAllUsuariosByName(nome: string): Observable<Usuario[]> {

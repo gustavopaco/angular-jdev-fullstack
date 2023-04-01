@@ -3,10 +3,10 @@
     <article *ngIf="isAdmin">
       <div class="card mt-2">
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-          <h2 >Lista de Usuários</h2>
-          <form action="#" [formGroup]="formularioPesquisa">
-            <input type="text" class="form-control" [formControlName]="'nome'" placeholder="Pesquisa por nome...">
-          </form>
+          <h2 class="fw-lighter">Lista de Usuários</h2>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" [formControl]="pesquisa" placeholder="Pesquisa por nome...">
+          </div><!--col-->
         </div>
         <div class="card-body table-responsive">
           <table class="table table-hover">
@@ -19,7 +19,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let usuario of usuarios">
+            <tr
+              *ngFor="let usuario of usuarios | paginate: {itemsPerPage: 5, currentPage: currentPage, totalItems: totalElements}">
               <th scope="row">{{ usuario.id }}</th>
               <td>{{ usuario.nome }}</td>
               <td>
@@ -28,20 +29,26 @@
               <td>
                 <div class="text-end">
                   <a class="btn btn-outline-warning me-2 mb-3 mb-md-0" [routerLink]="['edit/', usuario.id]">Editar</a>
-                  <a class="btn btn-outline-danger me-2 mb-3 mb-md-0" (click)="deleteUsuario(usuario.id)">Deletar</a>
+                  <a class="btn btn-outline-danger me-2 mb-3 mb-md-0" (click)="deleteConfirmation(usuario.id)">Deletar</a>
                 </div>
               </td>
             </tr>
             </tbody>
           </table>
+          <div class="row">
+            <div class="col-12 text-center">
+              <pagination-controls (pageChange)="onPageChange(currentPage = $event)" previousLabel="Voltar"
+                                   nextLabel="Avançar" [responsive]="true"></pagination-controls>
+            </div><!--col-->
+          </div><!--row-->
         </div>
       </div>
     </article>
     <article *ngIf="isFisica">
-      <h2>Bem vindo Pessoa Física</h2>
+      <h2 class="fw-lighter">Bem vindo Pessoa Física</h2>
     </article>
     <article *ngIf="isJuridica || isAdmin">
-      <h2>Bem vindo Pessoa Jurídica</h2>
+      <h2 class="fw-lighter">Bem vindo Pessoa Jurídica</h2>
     </article>
   </div>
 </section>

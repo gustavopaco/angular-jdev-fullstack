@@ -52,6 +52,7 @@ export class FormValidator {
   static validateSmallGenericMessage(input: FormControl, inputName: string, inputNameEqualsTo?: string): string {
     if (input.errors) {
       return input.hasError('required') ? `*${inputName} obrigatório.`
+        : input.hasError("mask") ? `*${inputName} obrigatório.`
         : input.hasError('minlength') ? `*Mínimo de ${input.errors['minlength'].requiredLength} caracteres.`
           : input.hasError('maxlength') ? `*Máximo de ${input.errors['maxlength'].requiredLength} caracteres.`
             : input.hasError('email') ? `*E-mail inválido.`

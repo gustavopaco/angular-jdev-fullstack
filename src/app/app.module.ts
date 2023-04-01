@@ -22,7 +22,7 @@ import {provideEnvironmentNgxMask} from "ngx-mask";
     HttpClientModule,
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

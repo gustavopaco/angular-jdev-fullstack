@@ -22,6 +22,7 @@
     "moment-timezone": "^0.5.42",
     "ngx-bootstrap": "^10.2.0",
     "ngx-mask": "^15.1.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^16.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
