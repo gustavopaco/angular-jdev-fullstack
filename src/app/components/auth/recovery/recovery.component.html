@@ -1,0 +1,24 @@
+<section class="recovery">
+<div class="container position-absolute top-50 start-50 translate-middle overflow-hidden">
+  <form action="#" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-12">
+    <h2 class="fw-lighter white-text">Recuperação de Senha</h2>
+      </div><!--col-->
+    </div><!--row-->
+    <div class="row">
+      <div class="col-12 mb-3 col-sm-9">
+        <input type="text" id="email" class="form-control" [formControlName]="'email'"
+               [ngClass]="validatorInputNgClass('email')"
+               placeholder="Informe seu e-mail">
+        <small class="invalid-feedback">{{ validatorSmallGenericMessage('email', 'E-mail') }}</small>
+      </div><!--col-->
+      <div class="col-12 mb-3 col-sm-3">
+      <button class="btn btn-primary w-100">Enviar</button>
+      </div>
+    </div><!--row-->
+  </form>
+</div><!--container-->
+</section>
+<router-outlet></router-outlet>
+<app-formulario-debug [formularioReativoDebug]="formulario"></app-formulario-debug>

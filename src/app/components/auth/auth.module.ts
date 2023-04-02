@@ -9,12 +9,16 @@ import {SharedModule} from "../../shared/components/shared.module";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {NgxMaskDirective} from "ngx-mask";
 import {NgxCurrencyModule} from "ngx-currency";
+import { RecoveryComponent } from './recovery/recovery.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    RecoveryComponent,
+    ResetPasswordComponent
   ],
   exports: [
     RegisterComponent
