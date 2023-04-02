@@ -41,10 +41,10 @@
             <div class="col-sm-6 mb-3 form-floating">
               <input type="text" class="form-control" id="dataNascimento" [formControlName]="'dataNascimento'"
                      [ngClass]="validatorInputNgClass('dataNascimento')" bsDatepicker
-                     [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue', showWeekNumbers: false}"
+                     [bsConfig]="{ isAnimated: true, useUtc: true, containerClass: 'theme-dark-blue', showWeekNumbers: false}"
                      [maxDate]="maxDate"
-                     placeholder="Daterangepicker">
-              <label for="dataNascimento" class="ps-4">Data de nascimento</label>
+                     placeholder="Data de nascimento">
+              <label for="dataNascimento" class="ps-4">Data de Nascimento</label>
               <small class="invalid-feedback">{{ validatorSmallGenericMessage('dataNascimento', 'Data de Nascimento') }}</small>
             </div><!--col-->
           </div><!--row-->

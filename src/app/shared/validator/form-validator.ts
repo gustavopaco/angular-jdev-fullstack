@@ -58,6 +58,7 @@ export class FormValidator {
             : input.hasError('email') ? `*E-mail inválido.`
               : input.hasError('emailInUse') ? `*E-mail já existe.`
                 : input.hasError('cepInvalido') ? `*CEP inválido.`
+                : input.hasError('bsDate') ? `*Formato de data inválido.`
                   : input.hasError('equalsTo') ? `*${inputName} e ${inputNameEqualsTo}, devem ser iguais.`
                     : input.hasError('min') ? `*${inputName} deve ser maior ou igual a ${input.errors['min'].min}`
                       : input.hasError('max') ? `*${inputName} deve ser menor ou igual a ${input.errors['max'].max}`

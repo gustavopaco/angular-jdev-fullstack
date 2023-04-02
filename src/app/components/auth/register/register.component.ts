@@ -18,8 +18,6 @@ import {DataFormatService} from "../../../shared/service/data-format.service";
 import {Profissao} from "../../../shared/model/Profissao";
 import {ProfissaoService} from "../../../shared/service/profissao.service";
 
-defineLocale('pt-br', ptBrLocale);
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -53,8 +51,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private localService: BsLocaleService,
     private dataFormatService: DataFormatService,
     private profissaoService: ProfissaoService) {
+    ptBrLocale.invalidDate = "Data inválida.";
+    defineLocale('pt-br', ptBrLocale);
+    localService.use('pt-br');
     this.locationHref = location;
-    localService.use('pt-br')
   }
 
   ngOnInit(): void {
@@ -64,10 +64,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   private loadDataFromDataBase() {
-      this.profissaoService.getAllProfissoes().subscribe({
-        next: response => {this.profissoes = response;},
-        error: err => {HttpValidator.validateResponseErrorMessage(err)}
-      })
+    this.profissaoService.getAllProfissoes().subscribe({
+      next: response => {
+        this.profissoes = response;
+      },
+      error: err => {
+        HttpValidator.validateResponseErrorMessage(err)
+      }
+    })
   }
 
 
@@ -219,7 +223,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         next: (response: Usuario) => {
           this.usuario = response;
           if (this.usuario.dataNascimento) {
-            this.usuario.dataNascimento = this.dataFormatService.formatUTCLocalDateToBrazilDate(this.usuario.dataNascimento.toString())
+            // this.usuario.dataNascimento = this.dataFormatService.formatUTCLocalDateToUTCDateBrazil(this.usuario.dataNascimento.toString())
+            this.usuario.dataNascimento = this.dataFormatService.formatLocalDateToDate(this.usuario.dataNascimento)
           }
           this.loadUsuarioOnEditPage(response);
         }

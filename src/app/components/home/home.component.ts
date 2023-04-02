@@ -34,8 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private usuarioService: UsuarioService,
               private toastMessage: ToastMessageService,
               private authService: AuthService,
-              private router: Router,
-              private fb: FormBuilder) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -115,9 +114,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: () => {
         this.toastMessage.successMessage("Usuário deletado com sucesso.");
         if (this.onDeleteIsSelfDelete(id)) {
-          this.invalidateUsuario(id)
+          this.invalidateUsuario();
         } else {
-          this.onDeleteRemoveUsuarioFromList(id)
+          this.onDeleteRemoveUsuarioFromList(id);
         }
       },
       error: err => {
@@ -147,9 +146,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     return (Number(this.authService.getUserId()) == id);
   }
 
-  private invalidateUsuario(id: number): void {
+  private invalidateUsuario(): void {
     this.authService.invalidateSession();
-    this.router.navigate(['/auth'])
+    this.router.navigate(['/auth']);
   }
 
   ngOnDestroy(): void {
