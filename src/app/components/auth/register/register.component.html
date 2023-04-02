@@ -71,9 +71,9 @@
             <div class="col-sm-6 mb-3">
               <div class="form-floating">
                 <input type="text" class="form-control" id="salario" [formControlName]="'salario'"
-                       [mask]="'separator.2'" [thousandSeparator]="'.'" [separatorLimit]="'1000000000'"
+                       currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal: ',', nullable: true}"
                        [ngClass]="validatorInputNgClass('salario')" placeholder="Informe seu Salário">
-                <label for="salario" class="">Salário R$</label>
+                <label for="salario" class="">Salário</label>
                 <small class="invalid-feedback">{{ validatorSmallGenericMessage('salario', 'Salario') }}</small>
               </div>
             </div><!--col-->

@@ -8,24 +8,26 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/components/shared.module";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {NgxMaskDirective} from "ngx-mask";
+import {NgxCurrencyModule} from "ngx-currency";
 
 
 @NgModule({
-    declarations: [
-        RegisterComponent,
-        AuthenticateComponent
-    ],
-    exports: [
-        RegisterComponent
-    ],
-    imports: [
-        CommonModule,
-        AuthRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        BsDatepickerModule,
-        NgxMaskDirective
-    ]
+  declarations: [
+    RegisterComponent,
+    AuthenticateComponent
+  ],
+  exports: [
+    RegisterComponent
+  ],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    BsDatepickerModule,
+    NgxMaskDirective,
+    NgxCurrencyModule
+  ]
 })
 export class AuthModule {
 }
