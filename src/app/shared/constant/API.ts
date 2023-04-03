@@ -6,3 +6,4 @@ export const API_USUARIO = `${environment.API}usuario`;
 export const API_TELEFONE = `${environment.API}telefones`;
 export const API_PROFISSAO = `${environment.API}profissoes`;
 export const API_RECOVERY = `${environment.API}recovery`;
+export const API_REPORT = `${environment.API}report`;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UsuarioService} from "../../shared/service/usuario.service";
 import {Usuario} from "../../shared/model/Usuario";
 import {ToastMessageService} from "../../shared/external/ngx-toastr/toast-message.service";
@@ -7,6 +7,7 @@ import {AuthService} from "../../shared/service/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {debounceTime, Subscription} from "rxjs";
+import {ReportService} from "../../shared/service/report.service";
 
 @Component({
   selector: 'app-home',
@@ -28,13 +29,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   totalPages: number = 0;
   numberOfElements: number = 0;
 
-
+  @ViewChild('iframeComponent') iFrame!: ElementRef;
   inscricao: Subscription[] = [];
 
   constructor(private usuarioService: UsuarioService,
               private toastMessage: ToastMessageService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private reportService: ReportService) {
   }
 
   ngOnInit(): void {
@@ -47,6 +49,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isAdmin = this.authService.isAdmin();
     this.isFisica = this.authService.isFisica();
     this.isJuridica = this.authService.isJuridica();
+  }
+
+  downloadReport(): void {
+    this.inscricao.push(this.reportService.downloadBasicReport().subscribe({
+      next: response => {
+        this.iFrame.nativeElement.src = response.report;
+      },
+      error: err => this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+    }))
   }
 
   private loadUsuarios(): void {
