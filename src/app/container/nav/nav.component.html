@@ -11,6 +11,9 @@
           <a class="nav-link" aria-current="page" [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['/home/report']" [routerLinkActive]="['active']" *ngIf="isAdmin || isJuridica">Report</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link cursor-pointer" (click)="invalidateSession()">Sair</a>
         </li>
       </ul>

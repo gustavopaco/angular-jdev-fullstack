@@ -1,0 +1,65 @@
+<section class="report">
+  <div class="container">
+    <div class="card mt-2">
+      <div class="card-header">
+        <h2 class="fw-lighter">Relatório</h2>
+        <form action="#" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3 mb-3 mb-md-0  form-floating">
+              <input type="text" class="form-control" id="dataInicial" [formControlName]="'initDate'"
+                     [ngClass]="validatorInputNgClass('initDate')" bsDatepicker
+                     [bsConfig]="{ isAnimated: true, useUtc: true, containerClass: 'theme-dark-blue', showWeekNumbers: false}"
+                     placeholder="Informe a Data Inicial">
+              <label for="dataInicial" class="ps-4">Data Inicial</label>
+              <small
+                class="invalid-feedback d-md-none">{{ validatorSmallGenericMessage('initDate', 'Data Inicial') }}</small>
+            </div><!--col-->
+            <div class="col-md-3 mb-3 mb-md-0 form-floating">
+              <input type="text" class="form-control" id="endDate" [formControlName]="'endDate'"
+                     [ngClass]="validatorInputNgClass('endDate')" bsDatepicker
+                     [bsConfig]="{ isAnimated: true, useUtc: true, containerClass: 'theme-dark-blue', showWeekNumbers: false}"
+                     placeholder="Informe a Data Final">
+              <label for="endDate" class="ps-4">Data Final</label>
+              <small
+                class="invalid-feedback d-md-none">{{ validatorSmallGenericMessage('endDate', 'Data Final') }}</small>
+            </div><!--col-->
+            <div class="col-auto align-self-center">
+              <button class="btn btn-outline-primary" [attr.data-bs-toggle]="openModalOnFormValid()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buscar</button>
+            </div><!--col-->
+          </div><!--row-->
+          <div class="row d-none d-md-flex">
+            <div class="col-md-3">
+              <div [ngClass]="validatorInputNgClass('initDate')"></div>
+              <small class="invalid-feedback ">{{ validatorSmallGenericMessage('initDate', 'Data Inicial') }}</small>
+            </div>
+            <div class="col-md-3">
+              <div class="col-md-3" [ngClass]="validatorInputNgClass('endDate')"></div>
+              <small class="invalid-feedback ">{{ validatorSmallGenericMessage('endDate', 'Data Final') }}</small>
+            </div>
+          </div>
+        </form>
+      </div><!--card-header-->
+    </div><!--card-->
+    <app-formulario-debug [formularioReativoDebug]="formulario"></app-formulario-debug>
+  </div><!--container-->
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Relatório</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearIFrame()"></button>
+        </div>
+        <div class="modal-body">
+          <iframe #iframeComponent src="" frameborder="0" width="100%" height="500" allowtransparency="true"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearIFrame()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

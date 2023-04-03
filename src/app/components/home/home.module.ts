@@ -7,12 +7,16 @@ import {UsuarioDetailsComponent} from './usuario/usuario-details/usuario-details
 import {AuthModule} from "../auth/auth.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
+import { UsuarioReportComponent } from './usuario/usuario-report/usuario-report.component';
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import {SharedModule} from "../../shared/components/shared.module";
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    UsuarioDetailsComponent
+    UsuarioDetailsComponent,
+    UsuarioReportComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +24,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     AuthModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    SharedModule,
+    BsDatepickerModule
   ]
 })
 export class HomeModule { }

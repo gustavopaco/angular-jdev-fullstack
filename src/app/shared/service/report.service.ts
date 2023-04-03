@@ -11,6 +11,10 @@ export class ReportService {
   constructor(private requestApi: HttpClient) { }
 
   downloadBasicReport(): Observable<any> {
-    return this.requestApi.get(API_REPORT)
+    return this.requestApi.get(API_REPORT);
+  }
+
+  advancedParamReport(formulario: any): Observable<any> {
+    return this.requestApi.post(API_REPORT, formulario);
   }
 }
