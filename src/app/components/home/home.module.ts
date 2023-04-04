@@ -10,13 +10,16 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { UsuarioReportComponent } from './usuario/usuario-report/usuario-report.component';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {SharedModule} from "../../shared/components/shared.module";
+import { UsuarioChartComponent } from './usuario/usuario-chart/usuario-chart.component';
+import {NgChartsModule} from "ng2-charts";
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     UsuarioDetailsComponent,
-    UsuarioReportComponent
+    UsuarioReportComponent,
+    UsuarioChartComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,8 @@ import {SharedModule} from "../../shared/components/shared.module";
     ReactiveFormsModule,
     NgxPaginationModule,
     SharedModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    NgChartsModule,
   ]
 })
 export class HomeModule { }

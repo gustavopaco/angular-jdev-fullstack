@@ -5,7 +5,6 @@ import {FormValidator} from "../../../shared/validator/form-validator";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {RecoveryService} from "../../../shared/service/recovery.service";
-import {HttpValidator} from "../../../shared/validator/http-validator";
 
 @Component({
   selector: 'app-reset-password',
@@ -49,10 +48,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
           this.tokenExpired = false;
           this.formulario.get("basicToken")?.setValue(this.pathVariable)
         },
-        error: err => {
-          this.toastMessageService.errorMessage(HttpValidator.validateResponseErrorMessage(err))
-          this.router.navigate(['/auth'])
-        }
+        error: () => {this.router.navigate(['/auth'])}
       }))
     }
     console.log(this.pathVariable);
@@ -74,8 +70,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         next: () => {
           this.toastMessageService.successMessage("Senha alterada com sucesso");
           this.router.navigate(['/auth'])
-        },
-        error: err => this.toastMessageService.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+        }
       }))
     }
   }

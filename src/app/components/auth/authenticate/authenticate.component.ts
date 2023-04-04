@@ -4,7 +4,6 @@ import {FormValidator} from "../../../shared/validator/form-validator";
 import {AuthService} from "../../../shared/service/auth.service";
 import {ToastMessageService} from "../../../shared/external/ngx-toastr/toast-message.service";
 import {Router} from "@angular/router";
-import {HttpValidator} from "../../../shared/validator/http-validator";
 
 @Component({
   selector: 'app-authenticate',
@@ -42,9 +41,6 @@ export class AuthenticateComponent implements OnInit {
           this.toastMessage.successMessage("Usuário logado com sucesso.")
           this.authService.savePermissions(response.id, JSON.stringify(response.authorities), response.jwt);
           this.router.navigate(['/home'])
-        },
-        error: err => {
-          this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err));
         }
       })
     }

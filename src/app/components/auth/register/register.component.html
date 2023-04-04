@@ -192,7 +192,7 @@
           <tbody>
           <tr *ngFor="let telefone of usuario?.telefones; index as j">
             <th scope="row">{{ telefone?.id }}</th>
-            <td>{{ telefone?.numero }}</td>
+            <td>{{ telefone.numero ? (telefone.numero | mask: '(00) 00000-0009') : ''}}</td>
             <td class="text-end">
               <button type="button" class="btn btn-outline-danger d-inline-block"
                       (click)="deleteTelefoneApi(telefone.id, j)">Deletar
@@ -218,6 +218,7 @@
               <div class="row">
                 <div class="col-12 form-floating">
                   <input type="text" class="form-control" id="numeroTel" [formControlName]="'numero'"
+                         [mask]="'(00) 00000-0009'" [dropSpecialCharacters]="true"
                          [ngClass]="validatorTelefone('numero')" placeholder="Informe o Telefone">
                   <label for="numeroTel" class="ps-4">Número</label>
                 </div><!--col-->

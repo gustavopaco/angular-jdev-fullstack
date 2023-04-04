@@ -7,7 +7,6 @@ import {UsuarioService} from "../../../shared/service/usuario.service";
 import {Subscription} from "rxjs";
 import {ToastMessageService} from "../../../shared/external/ngx-toastr/toast-message.service";
 import {Router} from "@angular/router";
-import {HttpValidator} from "../../../shared/validator/http-validator";
 import {AuthService} from "../../../shared/service/auth.service";
 import {Location} from "@angular/common";
 import {Telefone} from "../../../shared/model/Telefone";
@@ -67,9 +66,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.profissaoService.getAllProfissoes().subscribe({
       next: response => {
         this.profissoes = response;
-      },
-      error: err => {
-        HttpValidator.validateResponseErrorMessage(err)
       }
     })
   }
@@ -188,9 +184,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
             // TODO EDITAR PUT REQUEST
             this.toastMessage.successMessage("Usuário editado com sucesso.")
             this.router.navigate(['/home']);
-          },
-          error: err => {
-            this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
           }
         }))
       } else {
@@ -200,10 +193,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
             this.toastMessage.successMessage("Usuário cadastrado com sucesso.")
             this.authService.savePermissions(response.id, JSON.stringify(response.authorities), response.jwt)
             this.router.navigate(['/home'])
-          },
-          error: err => {
-            console.log(err)
-            this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
           }
         }))
       }
@@ -261,9 +250,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.toastMessage.successMessage("Novo telefone cadastrado com sucesso.")
         this.addTelefoneObject(response)
         this.usuario?.telefones?.push(response)
-      },
-      error: err => {
-        this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
       }
     }))
   }
@@ -277,9 +263,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
             this.usuario.telefones = this.usuario!.telefones?.filter(tel => tel.id != id)
             this.removeTelefone(j);
           }
-        },
-        error: err => {
-          HttpValidator.validateResponseErrorMessage(err)
         }
       }))
     }

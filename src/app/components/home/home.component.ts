@@ -2,10 +2,9 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {UsuarioService} from "../../shared/service/usuario.service";
 import {Usuario} from "../../shared/model/Usuario";
 import {ToastMessageService} from "../../shared/external/ngx-toastr/toast-message.service";
-import {HttpValidator} from "../../shared/validator/http-validator";
 import {AuthService} from "../../shared/service/auth.service";
 import {Router} from "@angular/router";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {debounceTime, Subscription} from "rxjs";
 import {ReportService} from "../../shared/service/report.service";
 
@@ -55,8 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.inscricao.push(this.reportService.downloadBasicReport().subscribe({
       next: response => {
         this.iFrame.nativeElement.src = response.report;
-      },
-      error: err => this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+      }
     }))
   }
 
@@ -66,9 +64,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         next: response => {
           this.loadPageableUsuario(response);
           this.backToFirstPage();
-        },
-        error: err => {
-          this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err));
         }
       });
     }
@@ -92,9 +87,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           next: response => {
             this.loadPageableUsuario(response);
             this.backToFirstPage();
-          },
-          error: err => {
-            HttpValidator.validateResponseErrorMessage(err)
           }
         }))
       } else if (data.length == 0) {
@@ -108,8 +100,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.inscricao.push(this.usuarioService.getUsuariosPage(page - 1, this.pesquisa.value).subscribe({
       next: response => {
         this.loadPageableUsuario(response);
-      },
-      error: err => this.toastMessage.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+      }
     }))
   }
 
@@ -129,9 +120,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         } else {
           this.onDeleteRemoveUsuarioFromList(id);
         }
-      },
-      error: err => {
-        HttpValidator.validateResponseErrorMessage(err);
       }
     })
   }

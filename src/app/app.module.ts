@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TokenInterceptor} from "./shared/service/token.interceptor";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {provideEnvironmentNgxMask} from "ngx-mask";
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {provideEnvironmentNgxMask} from "ngx-mask";
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
+    NgChartsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

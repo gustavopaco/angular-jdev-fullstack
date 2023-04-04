@@ -1,0 +1,45 @@
+<section class="usuario-chart">
+  <div class="container">
+    <div class="card my-5">
+      <div class="card-header">
+        <h2 class="fw-lighter">Bar Gráfico de salários</h2>
+      </div><!--card-header-->
+      <div class="card-body">
+        <canvas baseChart class="chart"
+                [options]="chartOptions()"
+                [plugins]="chartPlugins()"
+                [type]="chartBarType()"
+                [data]="chartDataResult">
+        </canvas>
+      </div><!--card-body-->
+    </div><!--card-->
+
+    <div class="card my-5">
+      <div class="card-header">
+        <h2 class="fw-lighter">Pie Gráfico de salários</h2>
+      </div><!--card-header-->
+      <div class="card-body">
+        <canvas baseChart class="chart"
+                [options]="chartOptions()"
+                [plugins]="chartPlugins()"
+                [type]="chartPieType()"
+                [data]="chartDataResult">
+        </canvas>
+      </div><!--card-body-->
+    </div><!--card-->
+
+    <div class="card my-5">
+      <div class="card-header">
+        <h2 class="fw-lighter">Donut Gráfico de salários</h2>
+      </div><!--card-header-->
+      <div class="card-body">
+        <canvas baseChart class="chart"
+                [options]="chartOptions()"
+                [plugins]="chartPlugins()"
+                [type]="chartDoughnutType()"
+                [data]="chartDataResult">
+        </canvas>
+      </div><!--card-body-->
+    </div><!--card-->
+  </div><!--container-->
+</section>

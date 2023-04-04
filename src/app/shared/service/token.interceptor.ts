@@ -1,38 +1,39 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {AuthService} from "./auth.service";
+import {HttpValidator} from "../validator/http-validator";
+import {ToastMessageService} from "../external/ngx-toastr/toast-message.service";
+import {EXPIRED_JWT_EXCEPTION, EXPIRED_JWT_EXCEPTION_MESSAGE} from "../constant/constants";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private toastMessageService: ToastMessageService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (this.authService.isUserLogged()) {
       const authenticatedRequest = request.clone({setHeaders: {"Authorization": this.authService.getFullToken()}})
-      // return next.handle(authenticatedRequest).pipe(catchError(this.processaError));
-      return next.handle(authenticatedRequest);
+      return next.handle(authenticatedRequest).pipe(catchError((error: HttpErrorResponse) => this.interceptInvalidToken(error)));
     }
-    // return next.handle(request).pipe(catchError(this.processaError));
-    return next.handle(request);
+    return next.handle(request).pipe(catchError((error: HttpErrorResponse) => this.interceptErrors(error)));
   }
 
-  processaError(error: HttpErrorResponse) {
-    let message = 'Erro desconhecido';
-    if (error.error instanceof ErrorEvent) {
-      console.log(error.error)
-      message = error.error.message;
+  interceptInvalidToken(error: HttpErrorResponse) {
+    if (error.status === 401 && error.error?.message === EXPIRED_JWT_EXCEPTION) {
+      this.authService.invalidateSession();
+      this.toastMessageService.errorMessage(EXPIRED_JWT_EXCEPTION_MESSAGE);
     } else {
-      message = error.error.message;
+      this.interceptErrors(error);
     }
-    return throwError(message);
+    return throwError(() => error);
+  }
+
+  interceptErrors(error: HttpErrorResponse) {
+    this.toastMessageService.errorMessage(HttpValidator.validateResponseErrorMessage(error))
+    return throwError(() => error);
   }
 }

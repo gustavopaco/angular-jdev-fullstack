@@ -4,9 +4,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {ReportService} from "../../../../shared/service/report.service";
 import {ToastMessageService} from "../../../../shared/external/ngx-toastr/toast-message.service";
-import {HttpValidator} from "../../../../shared/validator/http-validator";
 import {BsLocaleService} from "ngx-bootstrap/datepicker";
 import {defineLocale, ptBrLocale} from "ngx-bootstrap/chronos";
+
 @Component({
   selector: 'app-usuario-report',
   templateUrl: './usuario-report.component.html',
@@ -47,9 +47,6 @@ export class UsuarioReportComponent implements OnInit, OnDestroy {
       this.inscricao.push(this.reportService.advancedParamReport(this.formulario.value).subscribe({
         next: response => {
           this.iFrame.nativeElement.src = response.report;
-        },
-        error: err => {
-          this.toastMessageService.errorMessage(HttpValidator.validateResponseErrorMessage(err))
         }
       }))
     }

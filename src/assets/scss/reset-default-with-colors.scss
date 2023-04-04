@@ -24,6 +24,13 @@ html,body {
   color: #dc3545;
 }
 
+.toast-container {
+  position: fixed;
+  .ngx-toastr {
+    margin-top: 6px;
+  }
+}
+
 /*Note: Evento de FadeIn ao mudar de rota*/
 @keyframes fade {
   0% {

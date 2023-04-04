@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsuarioService} from "../../../../shared/service/usuario.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
-import {HttpValidator} from "../../../../shared/validator/http-validator";
-import {Usuario} from "../../../../shared/model/Usuario";
 
 @Component({
   selector: 'app-usuario-details',
@@ -32,8 +30,7 @@ export class UsuarioDetailsComponent implements OnInit, OnDestroy{
     this.inscricao.push(this.usuarioService.getUsuarioById(Number(this.pathVariable)).subscribe({
       next: response => {
         this.usuarioService.getUsuarioEmitter().emit(response)
-      },
-      error: err => { HttpValidator.validateResponseErrorMessage(err)}
+      }
     }))
   }
 

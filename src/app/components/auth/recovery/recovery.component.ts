@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RecoveryService} from "../../../shared/service/recovery.service";
 import {ToastMessageService} from "../../../shared/external/ngx-toastr/toast-message.service";
-import {HttpValidator} from "../../../shared/validator/http-validator";
 import {FormValidator} from "../../../shared/validator/form-validator";
 
 @Component({
@@ -35,8 +34,7 @@ export class RecoveryComponent implements OnInit{
     this.formularioSubmitted = true;
     if (this.formulario.valid) {
       this.recoveryService.sendEmail(this.formulario.value).subscribe({
-        next: () => this.toastMessageService.successMessage("E-mail enviado com sucesso."),
-        error: err => this.toastMessageService.errorMessage(HttpValidator.validateResponseErrorMessage(err))
+        next: () => this.toastMessageService.successMessage("E-mail enviado com sucesso.")
       })
     }
   }

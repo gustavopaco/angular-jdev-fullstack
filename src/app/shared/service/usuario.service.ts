@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {API_REGISTER, API_USUARIO} from "../constant/API";
+import {API_CHART, API_REGISTER, API_USUARIO} from "../constant/API";
 import {Observable, take} from "rxjs";
 import {Usuario} from "../model/Usuario";
 
@@ -12,6 +12,10 @@ export class UsuarioService {
   private usuarioEvent = new EventEmitter<Usuario>();
 
   constructor(private requestApi: HttpClient) { }
+
+  generateChart(): Observable<any> {
+    return this.requestApi.get(API_CHART);
+  }
 
   getAllUsuarios(): Observable<any> {
     return this.requestApi.get<any>(API_USUARIO).pipe(take(1))
