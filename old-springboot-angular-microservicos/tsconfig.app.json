@@ -7,9 +7,9 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "old-springboot-angular-microservicos/src/polyfills.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "old-springboot-angular-microservicos/src/**/*.d.ts"
   ]
 }
