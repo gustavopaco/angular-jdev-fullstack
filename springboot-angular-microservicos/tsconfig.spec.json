@@ -8,7 +8,7 @@
     ]
   },
   "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "springboot-angular-microservicos/src/**/*.spec.ts",
+    "springboot-angular-microservicos/src/**/*.d.ts"
   ]
 }
