@@ -1,0 +1,56 @@
+.rearrangeDiv {
+  padding: 0;
+  max-width: fit-content;
+}
+
+.tableCustomizada{
+  min-width: 100%;background-color: var(--bs-table-bg);
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+
+  --bs-table-bg: rgba(33, 37, 41, 0);
+  --bs-table-striped-bg: rgba(44, 48, 52, 0.3);
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: #373b3e;
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: #ecff5e;
+  --bs-table-hover-color: rgba(33, 37, 41, 0.97);
+  color: #fff;
+}
+
+td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.tableCustomTelefone {
+  --bs-table-bg: #f8f9fa;
+  --bs-table-striped-bg: #ecedee;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #dfe0e1;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: #a3de12;
+  --bs-table-hover-color: #000;
+  color: #000;
+  border-color: #dfe0e1;
+}
+
+.tituloCardTelefone {
+  padding: 0;
+  font-size: 20px;
+  text-decoration-style: solid;
+}
+
+.btnSelectReport {
+  margin-top: 1.9%;
+  height: 10%;
+  width: fit-content;
+}
+
+.headerTable {
+  /*margin-left: 18%;*/
+  font-size: 40px;
+  text-decoration-style: solid;
+  margin-top: 0.5%;
+  width: 48%;
+  height: fit-content;
+}
